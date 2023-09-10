@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#Button{
+    border: none;
+    height: 50px;
+    padding: 0 10px;
+    font-weight: bold;
+    width: 427px;
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #04aa6d;
+    color: white;
+    margin-bottom: 44px;
+}
+input.textInput{
+    border: none;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+    border-left: 4px solid rgb(0, 0, 0);
+    font-weight: bold;
+    height: 50px;
+    width: 400px;
+}
+#form{
+    width:auto;
+    background-color: darkslateblue;
+    text-align: center;
+    margin-left: 200px;
+    margin-right: 200px; 
+    height: auto;
+    box-shadow:0px 0px 10px 1px black;
+    margin-bottom: 30px;
+}
+#firstNameInput{
+    margin-top: 54px;
+}
+span{
+    font-size: 20px;
+    color: whitesmoke;
+}
+#radioLabel{
+    font-weight: bold;
+    font-size: 22px;
+}
+#secondSection{
+    margin-right: 20px;
+}
+#userNumber{
+    margin-right: 3px;
+};
+
+.genderRadio{
+    cursor: pointer;
+    accent-color : black ;
+}
+.genderOption{
+    cursor: pointer;
+}
+select{
+    font-size: 20px;
+    color: white;
+    border: none;
+    height: 55px;
+    padding: 0 12px;
+    width: 425px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: black;
+}
+option{
+    font-size: 20px;
+    color: white;
+    border: none;
+    background-color: black;
+    font-weight: bold;
+}
+.selectBoxLabel{
+    font-size: 24px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    font-weight: bold;
+    color: white;
+}
+
+

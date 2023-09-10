@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fa" dir="ltl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>exercises</title>
+</head>
+<body id="body" style="background-color: rgb(97, 97, 97); font-size: 80px ;">
+    <h1 style="text-align: center;" >exercises</h1>
+    <p style="text-align: center;">Meow !</p>
+    <div id="formCuntainer">
+        <form action="#" id="form">
+            <div>
+                <input type="text" name="firstName" class="textInput" id="firstNameInput" placeholder="First name">
+                <input type="text" name="lastName" class="textInput" id="lastNameInput" placeholder="Last name">
+            </div>
+            <div id="secondSection">
+                <input type="tel" name="number" class="textInput" id="userNumber" placeholder="Phone number">
+                <span id="radioLabel">Choose your gender :</span>
+                <label>
+                    <input type="radio" name="gender" class="genderRadio" value="male"> <span class="genderOption">Male</span>
+                </label>
+                <label>
+                    <input type="radio" name="gender" class="genderRadio" value="female"> <span class="genderOption">Female</span>
+                </label>
+            </div>
+            <div>
+                <select name="states" id="statesSelect">
+                    <option value="select a State" disabled selected>Select a State</option>
+                </select>
+                <select name="cities" id="citiesSelect">
+                    <option value="select a City" disabled selected id="selectedOption">Select a City</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" id="Button">Book Ticket</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONVERTING C° TO F°</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="alert">
+            <span class="material-symbols-outlined">
+            warning
+            </span>
+            Error : Enter the Temprature Currectly</div>
+        <div class="converter-container">
+            <div class="test-container">
+                <p>Converting</p>
+                <span id="into-what">C° to F°</span>
+            </div>
+            <input type="text" name="text" id="temp-input" placeholder="Temprature (C°)">
+            <div class="button-container">
+                <button id="convert-button">
+                    Convert
+                </button>
+                <button id="reset-button">
+                    Reset
+                </button>
+                <button id="change-button">
+                    Change
+                </button>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

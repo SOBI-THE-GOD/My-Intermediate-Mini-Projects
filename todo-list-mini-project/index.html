@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h1 id="h1-title">YOUR TODOS</h1>
+        <div class="todo">
+            <span class="todo-element todo-index">
+                <span class="todo-index-circle">
+                    1
+                </span>
+            </span>
+            <span class="todo-element todo-describe-container">
+                <details class="todo-describe">
+                    <summary>Example TODO</summary>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, odit.</p>
+                </details>
+            </span>
+            <span class="todo-element done"> 
+                <div class="done-circle" id="todo-done">
+                    <span class="material-symbols-outlined done-icon">
+                        close
+                    </span>
+                </div>
+            </span>
+            <span class="todo-element delete-todo">
+                <span class="delete-container">
+                    <span class="material-symbols-outlined delete-icon">
+                        delete
+                    </span>
+                </span>
+            </span>
+        </div>
+        <div class="add-box-container">
+            <span id="close-add-box" style="position: absolute; left: 4%; top: 7%; font-size: 28px; cursor: pointer;">
+                <span class="material-symbols-outlined" id="cancel-add-icon" style="transition: all .3s ease;">
+                    cancel
+                </span>
+            </span>
+            <input type="text" class="todo-input-boxes" id="add-todo-subject" placeholder="ToDo Subject" maxlength="22">
+            <textarea class="todo-input-boxes" id="todo-detail-text-area" placeholder="ToDo Detail"></textarea>
+            <div class="add-box-button">
+                Add
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

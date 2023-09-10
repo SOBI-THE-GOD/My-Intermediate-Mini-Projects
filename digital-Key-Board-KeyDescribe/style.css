@@ -1,0 +1,384 @@
+*{
+    margin : 0 ;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: inherit;
+}
+body {
+    background-color: rgb(246,248,250) ;
+    font-family: Sans-Serif;
+    overflow-x: hidden;
+}
+.key-board-detecter {
+    width: 100%;
+    height: 125vh;
+    position: relative;
+}   
+.text-container {
+    width: 68vw;
+    position: relative;
+}
+.text-container div {
+    height: 100%;
+    padding-top: 14vh;
+    text-align: center;
+}
+#key-code{
+    display: inline-block;
+    font-weight: 700;
+    width: 3.661vw;
+    height: 50px;
+    cursor: pointer;
+    z-index: 9999;
+    border: none;
+    border-radius: 100px;
+    outline: none;
+    text-align: center;
+    color: #ffffff;
+    background-color: #02ec88;
+    animation: drop 2s ease;
+    transition: all 0.5s ease , height 0.2s ease;
+}
+#key-code::placeholder{
+    color: #ffffff;
+}
+.key-entered {
+    font-size: 32px;
+    display: block;
+    height: 5.839vh;
+    margin-top: 10vh;
+    font-weight: 700;
+}
+.discribe-container {
+    width: 32vw;
+    height: 115vh;
+    position: absolute;
+    z-index: 9999;
+    right: 0;
+    top: 0;
+    background-color: rgb(9,36,68);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: -1px 1px 20px 4px #000000cc;
+    align-items: center;
+    row-gap: 64px;
+    border-radius: 0 0 0 100px;
+}
+#keyCode-title , #describe-key-title , #code-title{
+    align-self: self-end;
+    justify-self: self-start;
+    padding: 3px;
+    animation: toRight 1s ease-out;
+}
+#keyCode {
+    justify-self: center;
+    font-size: 80px;
+    align-self: center;
+    text-align: center;
+    animation: toLeft 1s ease-out;
+}
+#describe-key , #describe-key-title  , #code , #code-title , #keyCode , #keyCode-title{
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+}
+#describe-key , #code {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    font-size: 40px;
+    animation: toLeft 1s ease-out;
+}
+
+.key-discribe {
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+    grid-template-rows: repeat(3 , 1fr);
+    font-weight: 700;
+    min-width: 33%;
+    padding: 0 13px;
+    height: 20%;
+    box-shadow: inset 0px 0px 4px 0px #000;
+    border-radius: 6px;
+    background-color: rgb(246,248,250);
+}
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    width: 58vw;
+    margin-top: 6vh;
+    margin-left: 4vw;
+    border: 2px solid black;
+    padding: 2.6%;
+    border-radius: 8px;
+}
+.first-keyboard-layer {
+    display: flex;
+    column-gap: 6px;
+}
+.first-layer-keys {
+    width: 15.68%;
+    height: 3.85vh;
+    border-radius: 6px;
+}
+.first-keyboard-layer > :not(:first-child):not(:last-child) {
+    font-size: 9px ;
+    text-align: right;
+}
+.first-keyboard-layer > :first-child,
+.first-keyboard-layer > :last-child {
+    font-size: 12px;
+    text-align: center;
+}
+.first-keyboard-layer > *:not(:first-child):not(:last-child) span {
+    padding-top: 6px;
+    text-align: center;
+    padding-right: 2px;
+    float: right;
+}
+.second-keyboard-layer {
+    display: flex;
+    column-gap: 6px;
+    flex-grow: 1;
+    height: 6.92vh;
+}
+.second-layer-keys , .third-layer-keys , .fourth-layer-keys , .fifth-layer-keys , .sixth-layer-keys {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 6%;
+    font-size: 15px;
+    height: 100%;
+    border-radius: 6px;
+}
+#Backspace {
+    flex-grow: 1;
+}
+
+.third-keyboard-layer {
+    display: flex;
+    column-gap: 6px;
+    flex-grow: 1;
+    height: 6.92vh;
+}
+#Tab {
+    flex-grow: 1;
+}
+.fourth-keyboard-layer {
+    display: flex;
+    column-gap: 6px;
+    flex-grow: 1;
+    height: 6.92vh;
+}
+#Enter {
+    flex-grow: 1;
+}
+#CapsLock {
+    flex-grow: 0.5;
+} 
+.fifth-keyboard-layer {
+    display: flex;
+    column-gap: 5.5px;
+    flex-grow: 1;
+    height: 6.92vh;
+}
+#ShiftLeft {
+    flex-grow: 0.238;
+}
+#ShiftRight {
+    flex-grow: 0.238;
+}
+#stop-icon{
+    height: 10px;
+}
+.sixth-keyboard-layer {
+    display: flex;
+    column-gap: 6px;
+    flex-grow: 1;
+    height: 6.92vh;
+}
+#windows-img{
+    height: 19px;
+}
+#document-icon{
+    height: 21px;
+}
+#ArrowLeft , #ArrowDown , #ArrowUp , #ArrowRight{
+    justify-content: flex-end;
+}
+#play-pause-icon {
+    font-size: 18px;
+}
+#go-to-start-icon{
+    height: 15px;
+}
+#go-to-end-icon{
+    height: 15px;
+}
+#Space{
+    flex-grow: 8;
+}
+#ControlLeft , #ControlRight {
+    flex-grow: 0.1;
+}
+.key-keyboard {
+    background-color: #333;
+    color: #ffffff;
+    padding: 3px;
+    border: 1px solid #444;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.5s; 
+}
+.key-keyboard:active{
+    background: #02ec88;
+    font-weight: 700;
+    border: none;
+    box-shadow:  inset 0px 0px 12px 3px #ffffff;
+    color: #000000;
+}
+#Space span {
+    opacity: 0;
+}
+.active{
+    background: #02ec88;
+    font-weight: 700;
+    border: none;
+    box-shadow:  inset 0px 0px 12px 3px #ffffff;
+    color: #000000;
+}
+#Space:active span{
+    opacity: 1;
+}
+.key-keyboard::after {
+    content: '';
+    background-image: linear-gradient(-45deg , #fb0094, #00f, #0f0, 
+    #ff0, #f00, #fb0094, #00f, #0f0, #ff0, #f00);
+    background-size: 400%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    filter: blur(5px);
+    transition: all 0.5s; 
+    opacity: 0;
+}
+#windows-img {
+    color: #ffffff;
+}
+.key-keyboard.hover:after {
+    width: 102%;
+    height: 102%;
+    opacity: 1;
+    animation: rgbMaker 20s linear infinite;
+}
+.key-keyboard:hover:after {
+    width: 102%;
+    height: 102%;
+    opacity: 1;
+    animation: rgbMaker 20s linear infinite;
+}
+#describe-key{
+    word-wrap: normal;
+}
+
+
+@keyframes rgbMaker {
+    0%{
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+}
+@keyframes toLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes toRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-150px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#key-code:focus{
+    height: 150px;
+    background-color: #ffffff;
+    color: rgb(9,36,68);
+    font-size: 90px;
+    cursor: text;
+}
+#key-code:focus::placeholder{
+    color: rgb(9,36,68);
+}
+#animated-shadow {
+    position: absolute;
+    background-color: rgb(246,248,250);
+    width: 80vw;
+    height: 80vh;
+    top: 30%;
+    left: 2%;
+    z-index: 200;
+    box-shadow: -20px 0px 20px 0px rgb(246,248,250);
+    animation: keyBoardShower 2s linear forwards;
+}
+@keyframes keyBoardShower {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(70vw);
+    }
+}

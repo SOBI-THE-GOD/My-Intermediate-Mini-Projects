@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#formButton{
+    border: none;
+    height: 50px;
+    padding: 0 10px;
+    font-weight: bold;
+    width: 427px;
+    font-size: 18px;
+    border-radius: 25px;
+    background-color: #04aa6d;
+    color: white;
+    margin-bottom: 44px;
+}
+input{
+    border: none;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+    border-left: 4px solid rgb(0, 0, 0);
+    font-weight: bold;
+    height: 50px;
+    width: 400px;
+}
+#form{
+    width: 40%;
+    background-color: darkslateblue;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto; 
+    height: auto;
+    box-shadow:0px 0px 10px 1px black;
+    margin-bottom: 30px;
+}
+#validationMassageUserName{
+    background-color: red;
+    text-align: left;
+    margin-left: 70px;
+    margin-top: 5px;
+    font-size: 17px;
+    color: white;
+    border-radius: 6px;
+    max-width: fit-content;
+    padding: 5px;
+    display: none;
+}
+#validationMassagePassWord{
+    background-color: red;
+    text-align: left;
+    margin-left: 70px;
+    margin-top: 5px;
+    font-size: 17px;
+    color: white;
+    border-radius: 6px;
+    max-width: fit-content;
+    padding: 5px;
+    display: none;
+}
+#userNameInput{
+    margin-top: 54px;
+}
+#showPassWordImg{
+    position: absolute;
+    margin-left: 382px;
+    margin-top: 52px;
+    height: 34px;
+}
+#passWordInputCuntainer{
+    position: relative;
+}
+
+
