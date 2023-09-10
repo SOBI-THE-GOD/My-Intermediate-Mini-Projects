@@ -221,3 +221,11 @@ body {
 .music-control-hover-styled:active {
     color: #474646;
 }
+.change-duration-dress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: #000000;
+}
