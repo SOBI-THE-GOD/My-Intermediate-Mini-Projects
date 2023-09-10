@@ -7,6 +7,7 @@ const musicDurationBarSelectorElem = $.querySelector(".duration-bar-selector");
 let imageRotateDEG = 0;
 const audioRepeatToggleElem = $.querySelector(".audio-repeat-tuggle-button");
 audioRepeatToggleElem.addEventListener("mouseup", audioRepeatToggleHandler);
+const changeDurationSelectorDress = $.querySelector(".change-duration-dress");
 function audioRepeatToggleHandler(e) {
     e.target.classList.toggle("orange-color");
     if (musicTrackElem.loop) {
@@ -145,11 +146,9 @@ musicDurationBarSelectorElem.addEventListener(
 );
 function musicDurationBarSelectorMouseDownHandler(e) {
     e.target.style.backgroundColor = "#ffc681";
+    changeDurationSelectorDress.style.display = "block";
 }
-musicDurationBarSelectorElem.addEventListener(
-    "mouseup",
-    musicDurationBarSelectorMouseUpHandler
-);
-function musicDurationBarSelectorMouseUpHandler(e) {
-    e.target.style.backgroundColor = "#ffbc6a";
-}
+changeDurationSelectorDress.addEventListener("mouseup", (e) => {
+    e.target.style.display = "none";
+    musicDurationBarSelectorElem.style.backgroundColor = "#ffbc6a";
+});

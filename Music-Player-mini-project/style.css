@@ -223,9 +223,10 @@ body {
 }
 .change-duration-dress {
     position: absolute;
+    display: none;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    color: #000000;
+    z-index: 999999999;
 }
