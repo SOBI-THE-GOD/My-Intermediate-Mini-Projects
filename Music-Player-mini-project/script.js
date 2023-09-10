@@ -14,7 +14,6 @@ let mouseDownEvent = new MouseEvent("mousedown", {
     cancelable: true,
     view: window,
 });
-console.log(mouseDownEvent);
 $.querySelector(".duration-bar-click-dress").addEventListener(
     "mousedown",
     (e) => {
@@ -30,6 +29,10 @@ $.querySelector(".duration-bar-click-dress").addEventListener(
                 audioDurationBarContainerWidth) /
                 2 +
             "px";
+        musicTrackElem.currentTime =
+            (audioDurationBarElem.offsetWidth /
+                audioDurationBarContainerWidth) *
+            musicTrackElem.duration;
         musicDurationBarSelectorElem.dispatchEvent(mouseDownEvent);
     }
 );
@@ -41,6 +44,12 @@ function audioRepeatToggleHandler(e) {
         musicTrackElem.loop = true;
     }
 }
+$.querySelector(".audio-shuffle-toggle-button").addEventListener(
+    "mouseup",
+    (e) => {
+        e.target.classList.toggle("pink-purple-color");
+    }
+);
 const audioDurationBarContainerWidth = $.querySelector(
     ".duration-bar-container"
 ).offsetWidth;
@@ -106,6 +115,8 @@ function audioCurrentTimeHandler() {
             musicTrackElem.currentTime / musicTrackElem.duration;
         audioDurationBarElem.style.width =
             audioDurationBarContainerWidth * currentTimeDDuration + "px";
+        musicDurationBarSelectorElem.style.left =
+            audioDurationBarContainerWidth * currentTimeDDuration + "px";
         if (!isAudioPlayed) {
             clearInterval(audioCurrentTime);
         }
@@ -117,6 +128,7 @@ function audioCurrentTimeHandler() {
                 $.getElementById("music-picture").style.borderRadius = "0.3rem";
             }
             audioDurationBarElem.style.width = 0 + "px";
+            musicDurationBarSelectorElem.style.left = "0px";
         }
     }, 1);
 }
@@ -187,15 +199,21 @@ changeDurationSelectorDress.addEventListener("mousemove", (e) => {
         audioDurationBarElem.style.width = audioDurationBarExactWidth + "px";
         musicDurationBarSelectorElem.style.left =
             audioDurationBarExactWidth + "px";
+        musicTrackElem.currentTime =
+            (audioDurationBarElem.offsetWidth /
+                audioDurationBarContainerWidth) *
+            musicTrackElem.duration;
     }
     if (audioDurationBarExactWidth < 0) {
         audioDurationBarElem.style.width = "0px";
         musicDurationBarSelectorElem.style.left = "0px";
+        musicTrackElem.currentTime = 0;
     }
     if (audioDurationBarExactWidth > audioDurationBarContainerWidth) {
         audioDurationBarElem.style.width =
             audioDurationBarContainerWidth + "px";
         musicDurationBarSelectorElem.style.left =
             audioDurationBarContainerWidth + "px";
+        musicTrackElem.currentTime = musicTrackElem.duration;
     }
 });

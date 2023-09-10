@@ -74,7 +74,7 @@ body {
 }
 #sign-up-button::after {
     content: "";
-    background-color: #ff3b8c;
+    background-color: #ff7ef1;
     width: 90%;
     height: 100%;
     border-radius: 100px;
@@ -86,7 +86,7 @@ body {
 }
 #sign-in-button::after {
     content: "";
-    background-color: #ff9f2b;
+    background-color: #ffc681;
     width: 100%;
     height: 100%;
     border-radius: 100px;
@@ -102,7 +102,7 @@ body {
     opacity: 0;
 }
 #sign-up-button:hover {
-    background-color: #ffadcf;
+    background-color: rgb(254, 176, 255);
 }
 #sign-in-button:hover {
     background-color: #fcd5a6;
@@ -116,7 +116,7 @@ body {
 }
 
 #sign-up-button {
-    background-color: #f886b6;
+    background-color: #ff7ef1;
     padding-right: 3rem;
     border-radius: 100px 0 0 100px;
 }
@@ -208,6 +208,7 @@ body {
     border-radius: 50%;
     background-color: rgb(255, 198, 129);
     left: 0;
+    cursor: pointer;
     top: 50%;
     z-index: 1000;
     translate: -50% -50%;
@@ -215,6 +216,9 @@ body {
 }
 .audio-repeat-tuggle-button.orange-color {
     color: rgb(255, 166, 0);
+}
+.audio-shuffle-toggle-button.pink-purple-color {
+    color: #ff00fa;
 }
 .music-control-hover-styled:hover {
     color: #000000;
