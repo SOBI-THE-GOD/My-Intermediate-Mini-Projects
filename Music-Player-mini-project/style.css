@@ -197,7 +197,6 @@ body {
     height: 1vh;
 }
 .duration-bar {
-    position: relative;
     width: 0px;
     height: 100%;
     background-color: #000;
@@ -208,11 +207,11 @@ body {
     height: 2rem;
     border-radius: 50%;
     background-color: rgb(255, 198, 129);
-    left: 98%;
+    left: 0;
     top: 50%;
     z-index: 1000;
-    transform: translateY(-50%);
-    transition: all 0.1s;
+    translate: -50% -50%;
+    transition: all 0.1s, left 0ms;
 }
 .audio-repeat-tuggle-button.orange-color {
     color: rgb(255, 166, 0);

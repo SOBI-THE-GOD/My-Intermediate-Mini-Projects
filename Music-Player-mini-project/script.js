@@ -18,6 +18,12 @@ console.log(mouseDownEvent);
 $.querySelector(".duration-bar-click-dress").addEventListener(
     "mousedown",
     (e) => {
+        musicDurationBarSelectorElem.style.left =
+            e.pageX -
+            (e.target.parentElement.parentElement.offsetWidth -
+                audioDurationBarContainerWidth) /
+                2 +
+            "px";
         audioDurationBarElem.style.width =
             e.pageX -
             (e.target.parentElement.parentElement.offsetWidth -
@@ -178,16 +184,18 @@ changeDurationSelectorDress.addEventListener("mousemove", (e) => {
         audioDurationBarExactWidth <= audioDurationBarContainerWidth &&
         audioDurationBarExactWidth >= 0
     ) {
-        audioDurationBarElem.style.width =
-            e.pageX -
-            (e.target.offsetWidth - audioDurationBarContainerWidth) / 2 +
-            "px";
+        audioDurationBarElem.style.width = audioDurationBarExactWidth + "px";
+        musicDurationBarSelectorElem.style.left =
+            audioDurationBarExactWidth + "px";
     }
     if (audioDurationBarExactWidth < 0) {
         audioDurationBarElem.style.width = "0px";
+        musicDurationBarSelectorElem.style.left = "0px";
     }
     if (audioDurationBarExactWidth > audioDurationBarContainerWidth) {
         audioDurationBarElem.style.width =
+            audioDurationBarContainerWidth + "px";
+        musicDurationBarSelectorElem.style.left =
             audioDurationBarContainerWidth + "px";
     }
 });
