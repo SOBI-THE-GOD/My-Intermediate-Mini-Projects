@@ -8,6 +8,25 @@ let imageRotateDEG = 0;
 const audioRepeatToggleElem = $.querySelector(".audio-repeat-tuggle-button");
 audioRepeatToggleElem.addEventListener("mouseup", audioRepeatToggleHandler);
 const changeDurationSelectorDress = $.querySelector(".change-duration-dress");
+let audioDurationBarExactWidth = 0;
+let mouseDownEvent = new MouseEvent("mousedown", {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+});
+console.log(mouseDownEvent);
+$.querySelector(".duration-bar-click-dress").addEventListener(
+    "mousedown",
+    (e) => {
+        audioDurationBarElem.style.width =
+            e.pageX -
+            (e.target.parentElement.parentElement.offsetWidth -
+                audioDurationBarContainerWidth) /
+                2 +
+            "px";
+        musicDurationBarSelectorElem.dispatchEvent(mouseDownEvent);
+    }
+);
 function audioRepeatToggleHandler(e) {
     e.target.classList.toggle("orange-color");
     if (musicTrackElem.loop) {
@@ -151,4 +170,24 @@ function musicDurationBarSelectorMouseDownHandler(e) {
 changeDurationSelectorDress.addEventListener("mouseup", (e) => {
     e.target.style.display = "none";
     musicDurationBarSelectorElem.style.backgroundColor = "#ffbc6a";
+});
+changeDurationSelectorDress.addEventListener("mousemove", (e) => {
+    audioDurationBarExactWidth =
+        e.pageX - (e.target.offsetWidth - audioDurationBarContainerWidth) / 2;
+    if (
+        audioDurationBarExactWidth <= audioDurationBarContainerWidth &&
+        audioDurationBarExactWidth >= 0
+    ) {
+        audioDurationBarElem.style.width =
+            e.pageX -
+            (e.target.offsetWidth - audioDurationBarContainerWidth) / 2 +
+            "px";
+    }
+    if (audioDurationBarExactWidth < 0) {
+        audioDurationBarElem.style.width = "0px";
+    }
+    if (audioDurationBarExactWidth > audioDurationBarContainerWidth) {
+        audioDurationBarElem.style.width =
+            audioDurationBarContainerWidth + "px";
+    }
 });

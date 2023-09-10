@@ -192,6 +192,7 @@ body {
 .duration-bar-container {
     margin-top: 3rem;
     border: 2px solid #000;
+    position: relative;
     width: 52vw;
     height: 1vh;
 }
@@ -209,6 +210,7 @@ body {
     background-color: rgb(255, 198, 129);
     left: 98%;
     top: 50%;
+    z-index: 1000;
     transform: translateY(-50%);
     transition: all 0.1s;
 }
@@ -229,4 +231,12 @@ body {
     height: 100%;
     width: 100%;
     z-index: 999999999;
+}
+.duration-bar-click-dress {
+    position: absolute;
+    top: -780%;
+    left: 0;
+    height: 1600%;
+    width: 100%;
+    z-index: 999;
 }
