@@ -360,3 +360,15 @@ body {
     transition: opacity 0.1s;
     z-index: 5;
 }
+.current-audio-time {
+    position: absolute;
+    left: -4.3rem;
+    top: -0.5rem;
+    font-size: 1.3rem;
+}
+.audio-duration {
+    position: absolute;
+    right: -4.3rem;
+    top: -0.5rem;
+    font-size: 1.3rem;
+}

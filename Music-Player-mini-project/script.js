@@ -39,7 +39,47 @@ const playBackRateOptionElemsArr = Array.from(
     $.querySelectorAll(".play-back-rate-option")
 );
 let isPlayBackRateOptionsOpen = false;
-volumeProperIconHandler();
+const audioCurrentTimeShowerElem = $.querySelector(".current-audio-time");
+const audioDurationShowerElem = $.querySelector(".audio-duration");
+let audioCurrentTimeSeconds = 0;
+let isAudioPlayed = false;
+let currentTimeDDuration = 0;
+function showingAudioDurationHandler() {
+    setTimeout(() => {
+        let minutes = Math.floor(musicTrackElem.duration / 60);
+        let seconds = Math.floor(musicTrackElem.duration % 60);
+        if (minutes < 10) {
+            minutes = "0" + String(minutes);
+        }
+        if (seconds < 10) {
+            seconds = "0" + String(seconds);
+        }
+        audioDurationShowerElem.innerHTML = minutes + ":" + seconds;
+    }, 500);
+}
+showingAudioDurationHandler();
+function audioCurrentTimeShowingHandler() {
+    let minutes = 0;
+    let seconds = 0;
+    let showingCurrentAudioTimeInterval = setInterval(() => {
+        audioCurrentTimeSeconds = musicTrackElem.currentTime
+            .toFixed(2)
+            .split(".");
+        audioCurrentTimeSeconds = Number(audioCurrentTimeSeconds[0]);
+        minutes = Math.floor(audioCurrentTimeSeconds / 60);
+        seconds = audioCurrentTimeSeconds % 60;
+        if (minutes < 10) {
+            minutes = "0" + String(minutes);
+        }
+        if (seconds < 10) {
+            seconds = "0" + String(seconds);
+        }
+        audioCurrentTimeShowerElem.innerHTML = minutes + ":" + seconds;
+        if (!isAudioPlayed) {
+            clearInterval(showingCurrentAudioTimeInterval);
+        }
+    }, 100);
+}
 playBackRateIconElem.addEventListener(
     "mouseup",
     playBackRateIconMouseUpHandler
@@ -55,13 +95,6 @@ function playBackRateIconMouseUpHandler() {
             elem.style.translate = " 0 0";
         });
     }, 0.000001);
-    // setTimeout(() => {
-    //     playBackRateOptionElemsArr.forEach((elem) => {
-    //         if (elem.dataset.optionNumber !== 1) {
-    //             elem.style.opacity = "1";
-    //         }
-    //     });
-    // }, 100);
     playBackRateOptionElemsArr.forEach((elem) => {
         if (elem.dataset.optionNumber !== 1) {
             elem.style.opacity = "1";
@@ -319,9 +352,8 @@ function buttonMouseUpHandler() {
     audioImageRotateHandler();
     audioImageBorderHandler();
     audioCurrentTimeHandler();
+    audioCurrentTimeShowingHandler();
 }
-let isAudioPlayed = false;
-let currentTimeDDuration = 0;
 function audioCurrentTimeHandler() {
     let audioCurrentTime = setInterval(() => {
         currentTimeDDuration =
@@ -430,3 +462,4 @@ changeDurationSelectorDress.addEventListener("mousemove", (e) => {
         musicTrackElem.currentTime = musicTrackElem.duration;
     }
 });
+volumeProperIconHandler();
