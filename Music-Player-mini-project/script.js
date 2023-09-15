@@ -8,11 +8,148 @@ let imageRotateDEG = 0;
 const audioRepeatToggleElem = $.querySelector(".audio-repeat-tuggle-button");
 audioRepeatToggleElem.addEventListener("mouseup", audioRepeatToggleHandler);
 const changeDurationSelectorDress = $.querySelector(".change-duration-dress");
+const volumeBarWrapperElemheight = $.querySelector(
+    ".volume-bar-wrapper"
+).offsetHeight;
 let audioDurationBarExactWidth = 0;
 let mouseDownEvent = new MouseEvent("mousedown", {
     bubbles: true,
     cancelable: true,
     view: window,
+});
+const volumeIconClasses = [
+    "fa-volume-high",
+    "fa-volume",
+    "fa-volume-low",
+    "fa-volume-slash",
+];
+const volumeHighlightElem = $.querySelector(".volume-bar-highlight");
+const volumeBarElem = $.querySelector(".volume-bar");
+const volumeIconElem = $.querySelector(".volume-icon");
+const volumeBarDressElem = $.querySelector(".volume-bar-dress");
+const changeVolumeBarDress = $.querySelector(".change-volume-dress");
+volumeIconElem.addEventListener("mouseenter", volumeIconMouseInHandler);
+let durationBarScaleTimeOut = 0;
+let isChangeVolumeDressUp = false;
+let highlightVolumeHeight = 0;
+let isaudioMuted = false;
+volumeProperIconHandler();
+function volumeIconMouseInHandler() {
+    volumeBarElem.style.height = "100%";
+    clearTimeout(durationBarScaleTimeOut);
+    volumeBarElem.style.scale = "1";
+    volumeBarDressElem.style.display = "block";
+}
+volumeBarDressElem.addEventListener(
+    "mouseleave",
+    volumeBarDressMouseLeaveHandler
+);
+function volumeProperIconHandler() {
+    if (musicTrackElem.volume >= 0.66) {
+        volumeIconClasses.forEach((cs) => {
+            volumeIconElem.classList.remove(cs);
+        });
+        volumeIconElem.classList.add(volumeIconClasses[0]);
+    } else if (musicTrackElem.volume >= 0.33 && musicTrackElem.volume < 0.66) {
+        volumeIconClasses.forEach((cs) => {
+            volumeIconElem.classList.remove(cs);
+        });
+        volumeIconElem.classList.add(volumeIconClasses[1]);
+    } else if (musicTrackElem.volume > 0 && musicTrackElem.volume < 0.33) {
+        volumeIconClasses.forEach((cs) => {
+            volumeIconElem.classList.remove(cs);
+        });
+        volumeIconElem.classList.add(volumeIconClasses[2]);
+    } else if (musicTrackElem.volume <= 0) {
+        volumeIconClasses.forEach((cs) => {
+            volumeIconElem.classList.remove(cs);
+        });
+        volumeIconElem.classList.add(volumeIconClasses[3]);
+    }
+}
+function volumeBarDressMouseLeaveHandler() {
+    if (!isChangeVolumeDressUp) {
+        volumeBarElem.style.height = "0";
+        volumeBarDressElem.style.display = "none";
+        durationBarScaleTimeOut = setTimeout(() => {
+            volumeBarElem.style.scale = "0";
+        }, 300);
+    }
+}
+volumeBarDressElem.addEventListener(
+    "mousedown",
+    volumeBarDressMouseDownHandler
+);
+function volumeBarDressMouseDownHandler(e) {
+    highlightVolumeHeight =
+        volumeBarWrapperElemheight -
+        (e.clientY +
+            window.scrollY -
+            (window.scrollY + e.target.getBoundingClientRect().top));
+    volumeHighlightElem.style.height = highlightVolumeHeight + "px";
+    if (highlightVolumeHeight >= volumeBarWrapperElemheight) {
+        volumeHighlightElem.style.height = "100%";
+    } else if (highlightVolumeHeight <= 0) {
+        volumeHighlightElem.style.height = "0%";
+    }
+    musicTrackElem.volume =
+        volumeHighlightElem.offsetHeight / volumeBarWrapperElemheight;
+    volumeProperIconHandler();
+    isChangeVolumeDressUp = true;
+    changeVolumeBarDress.style.display = "block";
+    volumeHighlightElem.style.backgroundColor = "#ffbc6a";
+    changeVolumeBarDress.addEventListener(
+        "mouseup",
+        changeVolumeDressMouseUpHandler
+    );
+    changeVolumeBarDress.addEventListener(
+        "mousemove",
+        changeVolumeDressMouseMoveHandler
+    );
+}
+function changeVolumeDressMouseMoveHandler(e) {
+    highlightVolumeHeight =
+        volumeBarWrapperElemheight -
+        (e.clientY +
+            window.scrollY -
+            (window.scrollY + volumeBarDressElem.getBoundingClientRect().top));
+    volumeHighlightElem.style.height = highlightVolumeHeight + "px";
+    if (highlightVolumeHeight >= volumeBarWrapperElemheight) {
+        volumeHighlightElem.style.height = "100%";
+    } else if (highlightVolumeHeight <= 0) {
+        volumeHighlightElem.style.height = "0%";
+    }
+    musicTrackElem.volume =
+        volumeHighlightElem.offsetHeight / volumeBarWrapperElemheight;
+    volumeProperIconHandler();
+}
+function changeVolumeDressMouseUpHandler(e) {
+    console.log("mouseup");
+    isChangeVolumeDressUp = false;
+    e.target.style.display = "none";
+    volumeHighlightElem.style.backgroundColor = "rgb(255, 198, 129)";
+    e.target.removeEventListener("mouseUp", changeVolumeDressMouseUpHandler);
+    changeVolumeBarDress.removeEventListener(
+        "mousemove",
+        changeVolumeDressMouseMoveHandler
+    );
+}
+volumeIconElem.addEventListener("mouseup", () => {
+    if (isaudioMuted) {
+        musicTrackElem.volume = 1;
+        volumeIconElem.classList.remove(volumeIconClasses[3]);
+        volumeIconElem.classList.add(volumeIconClasses[0]);
+        volumeHighlightElem.style.height = "100%";
+        isaudioMuted = false;
+    } else {
+        musicTrackElem.volume = 0;
+        volumeIconClasses.forEach((cs) => {
+            volumeIconElem.classList.remove(cs);
+        });
+        volumeIconElem.classList.add(volumeIconClasses[3]);
+        volumeHighlightElem.style.height = "0%";
+        isaudioMuted = true;
+    }
 });
 $.querySelector(".duration-bar-click-dress").addEventListener(
     "mousedown",

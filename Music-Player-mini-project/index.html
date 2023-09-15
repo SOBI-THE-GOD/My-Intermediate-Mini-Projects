@@ -32,6 +32,7 @@
             </ul>
         </nav>
         <div class="change-duration-dress"></div>
+        <div class="change-volume-dress"></div>
         <section class="music-player-container">
             <audio
                 src="drunky_(prod_.meytune)_wvdf.mp3"
@@ -49,6 +50,12 @@
                 <div class="duration-bar"></div>
             </div>
             <div class="music-player-buttons-container">
+                <button class="music-player-buttons">
+                    <i class="fa-solid fa-gauge-min"></i>
+                    <!-- <i class="fa-solid fa-gauge-low"></i> -->
+                    <!-- <i class="fa-solid fa-gauge-high"></i> -->
+                    <!-- <i class="fa-solid fa-gauge-max"></i> -->
+                </button>
                 <button class="music-player-buttons music-control-hover-styled">
                     <i
                         class="fa-solid fa-shuffle music-controls audio-shuffle-toggle-button"
@@ -74,6 +81,22 @@
                 >
                     <i
                         class="fa-solid fa-repeat music-controls audio-repeat-tuggle-button"
+                    ></i>
+                </button>
+                <button class="music-player-buttons volume-container">
+                    <div class="volume-bar-wrapper">
+                        <div class="volume-bar-second-wrapper">
+                            <div class="volume-bar-dress"></div>
+                            <div class="volume-bar">
+                                <div class="volume-bar-highlight-container">
+                                    <div class="volume-bar-highlight"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <i
+                        class="fa-solid fa-volume-high volume-icon"
+                        id="volume-icon"
                     ></i>
                 </button>
             </div>
