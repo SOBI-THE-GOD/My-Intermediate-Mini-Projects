@@ -250,7 +250,7 @@ body {
 }
 .volume-bar-wrapper {
     position: absolute;
-    top: -400%;
+    top: -395%;
     left: 50%;
     width: 2.2rem;
     height: 8rem;
@@ -274,11 +274,11 @@ body {
 }
 .volume-bar-dress {
     position: absolute;
-    width: 4.3rem;
+    width: 4.8rem;
     height: 12.6rem;
     top: 0;
     border-radius: 200rem;
-    left: -91%;
+    left: -115%;
     display: none;
     z-index: 500;
 }
@@ -308,4 +308,55 @@ body {
     height: 100%;
     width: 100%;
     z-index: 999999999;
+}
+.play-back-rate-button {
+    position: relative;
+}
+.play-back-rate-options-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 164%;
+    transform: translateX(-15.5%);
+    display: none;
+}
+.play-back-rate-options-container > :first-child {
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+.play-back-rate-options-container > :last-child {
+    border-radius: 0 0 0.3rem 0.3rem;
+}
+.play-back-rate-option {
+    color: #ffffff;
+    background-color: #474646;
+    padding-block: 0.3rem;
+    padding-inline: 0.3rem;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition-timing-function: cubic-bezier(0.2, 0.46, 0.36, 0.93);
+}
+.play-back-rate-option:hover {
+    background-color: #000000;
+}
+.play-back-rate-option:active {
+    background-color: #474646;
+}
+.fourth-play-back-rate-option {
+    transition: translate 0.4s;
+    translate: 0 300%;
+    z-index: 2;
+}
+.third-play-back-rate-option {
+    transition: translate 0.3s;
+    translate: 0 200%;
+    z-index: 3;
+}
+.second-play-back-rate-option {
+    transition: translate 0.2s;
+    translate: 0 100%;
+    z-index: 4;
+}
+.first-play-back-rate-option {
+    transition: opacity 0.1s;
+    z-index: 5;
 }

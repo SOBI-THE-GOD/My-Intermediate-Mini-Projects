@@ -33,7 +33,83 @@ let durationBarScaleTimeOut = 0;
 let isChangeVolumeDressUp = false;
 let highlightVolumeHeight = 0;
 let isaudioMuted = false;
+const playBackRateIconElem = $.querySelector(".play-back-rate-icon");
+const playBackRateButtonElem = $.querySelector(".play-back-rate-button");
+const playBackRateOptionElemsArr = Array.from(
+    $.querySelectorAll(".play-back-rate-option")
+);
+let isPlayBackRateOptionsOpen = false;
 volumeProperIconHandler();
+playBackRateIconElem.addEventListener(
+    "mouseup",
+    playBackRateIconMouseUpHandler
+);
+function playBackRateIconMouseUpHandler() {
+    $.querySelector(".first-play-back-rate-option").style.transition =
+        "opacity 0s";
+    isPlayBackRateOptionsOpen = true;
+    playBackRateButtonElem.children[1].style.display = "flex";
+    setTimeout(() => {
+        playBackRateOptionElemsArr.forEach((elem) => {
+            elem.addEventListener("mouseup", playBackRateOptionsMouseUpHandler);
+            elem.style.translate = " 0 0";
+        });
+    }, 0.000001);
+    // setTimeout(() => {
+    //     playBackRateOptionElemsArr.forEach((elem) => {
+    //         if (elem.dataset.optionNumber !== 1) {
+    //             elem.style.opacity = "1";
+    //         }
+    //     });
+    // }, 100);
+    playBackRateOptionElemsArr.forEach((elem) => {
+        if (elem.dataset.optionNumber !== 1) {
+            elem.style.opacity = "1";
+        }
+    });
+}
+$.body.addEventListener("mouseup", closePlayBackRateOptions);
+function closePlayBackRateOptions() {
+    if (isPlayBackRateOptionsOpen === true) {
+        isPlayBackRateOptionsOpen = false;
+    } else {
+        isPlayBackRateOptionsOpen = true;
+    }
+    if (isPlayBackRateOptionsOpen) {
+        $.querySelector(".first-play-back-rate-option").style.transition =
+            "opacity 0.1s";
+        playBackRateOptionElemsArr.forEach((elem) => {
+            elem.removeEventListener(
+                "mouseup",
+                playBackRateOptionsMouseUpHandler
+            );
+            if (elem.dataset.optionNumber === "4") {
+                elem.style.translate = " 0 300%";
+            } else if (elem.dataset.optionNumber === "3") {
+                elem.style.translate = " 0 200%";
+            } else if (elem.dataset.optionNumber === "2") {
+                elem.style.translate = " 0 100%";
+            }
+        });
+        setTimeout(() => {
+            playBackRateOptionElemsArr.forEach((elem) => {
+                if (elem.dataset.optionNumber !== 1) {
+                    elem.style.opacity = "0";
+                }
+            });
+            $.querySelector(".first-play-back-rate-option").style.opacity = "0";
+        }, 300);
+        setTimeout(() => {
+            playBackRateButtonElem.children[1].style.display = "none";
+        }, 400);
+    }
+}
+function playBackRateOptionsMouseUpHandler(e) {
+    let iconClassArr = playBackRateIconElem.className.split(" ");
+    playBackRateIconElem.classList.remove(iconClassArr[2]);
+    playBackRateIconElem.classList.add(e.target.dataset.iconClass);
+    musicTrackElem.playbackRate = Number(e.target.innerHTML.trim());
+}
 function volumeIconMouseInHandler() {
     volumeBarElem.style.height = "100%";
     clearTimeout(durationBarScaleTimeOut);
