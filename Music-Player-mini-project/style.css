@@ -317,7 +317,7 @@ body {
     flex-direction: column;
     position: absolute;
     bottom: 164%;
-    transform: translateX(-15.5%);
+    transform: translateX(-8%);
     display: none;
 }
 .play-back-rate-options-container > :first-child {

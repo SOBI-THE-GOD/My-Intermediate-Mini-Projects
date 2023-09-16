@@ -143,8 +143,9 @@ function playBackRateOptionsMouseUpHandler(e) {
     playBackRateIconElem.classList.add(e.target.dataset.iconClass);
     musicTrackElem.playbackRate = Number(e.target.innerHTML.trim());
 }
-function volumeIconMouseInHandler() {
+function volumeIconMouseInHandler(e) {
     volumeBarElem.style.height = "100%";
+    e.target.style.color = "#000000";
     clearTimeout(durationBarScaleTimeOut);
     volumeBarElem.style.scale = "1";
     volumeBarDressElem.style.display = "block";
@@ -178,6 +179,7 @@ function volumeProperIconHandler() {
 }
 function volumeBarDressMouseLeaveHandler() {
     if (!isChangeVolumeDressUp) {
+        volumeIconElem.style.color = "#474646";
         volumeBarElem.style.height = "0";
         volumeBarDressElem.style.display = "none";
         durationBarScaleTimeOut = setTimeout(() => {
@@ -190,6 +192,7 @@ volumeBarDressElem.addEventListener(
     volumeBarDressMouseDownHandler
 );
 function volumeBarDressMouseDownHandler(e) {
+    volumeIconElem.style.color = "#474646";
     highlightVolumeHeight =
         volumeBarWrapperElemheight -
         (e.clientY +
@@ -233,9 +236,9 @@ function changeVolumeDressMouseMoveHandler(e) {
     volumeProperIconHandler();
 }
 function changeVolumeDressMouseUpHandler(e) {
-    console.log("mouseup");
     isChangeVolumeDressUp = false;
     e.target.style.display = "none";
+    volumeIconElem.style.color = "#000000";
     volumeHighlightElem.style.backgroundColor = "rgb(255, 198, 129)";
     e.target.removeEventListener("mouseUp", changeVolumeDressMouseUpHandler);
     changeVolumeBarDress.removeEventListener(
