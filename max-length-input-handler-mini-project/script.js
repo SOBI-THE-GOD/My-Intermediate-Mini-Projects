@@ -1,18 +1,14 @@
 const inputElem = document.getElementById("input");
 let inputElemLength = 19;
 let isWritable = true;
-inputElem.addEventListener("keydown", (e) => {
+inputElem.addEventListener("input", (e) => {
     calcInputLength(e);
     innerHTMLLengthUpdater();
     inputStylesHandler();
     inputMaxLengthHandler(e);
 });
 function calcInputLength(e) {
-    if (e.key === "Backspace" && inputElemLength !== 19) {
-        inputElemLength++;
-    } else if (e.key !== "Backspace" && isWritable === true) {
-        inputElemLength--;
-    }
+    inputElemLength = 19 - e.target.value.length;
 }
 function innerHTMLLengthUpdater() {
     document.getElementById("input-length").innerHTML = inputElemLength;
