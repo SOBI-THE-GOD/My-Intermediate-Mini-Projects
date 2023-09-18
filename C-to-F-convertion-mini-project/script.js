@@ -56,22 +56,27 @@ function converter() {
     } else {
         if (isAlertVisible) {
             setTimeout(() => {
-                alertElem.style.animation = "OpacityDown 0.4s ease";
-            }, 4000);
-            setTimeout(() => {
-                $.getElementById("alert").style.display = "none";
-                isAlertVisible = false;
-            }, 4400);
-        } else {
-            alertElem.style.animation = "OpacityUp 0.4s ease";
-            alertElem.style.display = "block";
-            setTimeout(() => {
                 if (!isAlertVisible) {
                     alertElem.style.animation = "OpacityDown 0.4s ease";
                 }
             }, 4000);
             setTimeout(() => {
                 if (!isAlertVisible) {
+                    $.getElementById("alert").style.display = "none";
+                    isAlertVisible = false;
+                }
+            }, 4400);
+            isAlertVisible = false;
+        } else {
+            alertElem.style.animation = "OpacityUp 0.4s ease";
+            alertElem.style.display = "block";
+            setTimeout(() => {
+                if (isAlertVisible) {
+                    alertElem.style.animation = "OpacityDown 0.4s ease";
+                }
+            }, 4000);
+            setTimeout(() => {
+                if (isAlertVisible) {
                     $.getElementById("alert").style.display = "none";
                     isAlertVisible = false;
                 }
