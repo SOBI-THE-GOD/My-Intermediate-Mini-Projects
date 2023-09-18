@@ -14,8 +14,8 @@ html {
 }
 ::-webkit-scrollbar-track {
     background-color: #efefef;
-    margin-block: 5rem;
-    border-radius: 100px;
+    margin-block: 12.2887vh;
+    border-radius: 100rem;
 }
 ::-webkit-scrollbar-thumb {
     background-color: #000000;
