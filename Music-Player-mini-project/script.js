@@ -6,6 +6,9 @@ const playButtonElem = $.querySelector(".play-button");
 const musicDurationBarSelectorElem = $.querySelector(".duration-bar-selector");
 let imageRotateDEG = 0;
 const audioRepeatToggleElem = $.querySelector(".audio-repeat-tuggle-button");
+let audioDurationBarContainerWidth = $.querySelector(
+    ".duration-bar-container"
+).offsetWidth;
 audioRepeatToggleElem.addEventListener("mouseup", audioRepeatToggleHandler);
 const changeDurationSelectorDress = $.querySelector(".change-duration-dress");
 const volumeBarWrapperElemheight = $.querySelector(
@@ -266,6 +269,7 @@ volumeIconElem.addEventListener("mouseup", () => {
 $.querySelector(".duration-bar-click-dress").addEventListener(
     "mousedown",
     (e) => {
+        audioDurationBarContainerWidthUpdater();
         musicDurationBarSelectorElem.style.left =
             e.pageX -
             (e.target.parentElement.parentElement.offsetWidth -
@@ -299,9 +303,6 @@ $.querySelector(".audio-shuffle-toggle-button").addEventListener(
         e.target.classList.toggle("pink-purple-color");
     }
 );
-const audioDurationBarContainerWidth = $.querySelector(
-    ".duration-bar-container"
-).offsetWidth;
 const audioDurationBarElem = $.querySelector(".duration-bar");
 const audioTimeBackWireButton = $.querySelector(".sec-back-wire");
 const audioTimeForwardButton = $.querySelector(".sec-forward");
@@ -359,6 +360,7 @@ function buttonMouseUpHandler() {
 }
 function audioCurrentTimeHandler() {
     let audioCurrentTime = setInterval(() => {
+        audioDurationBarContainerWidthUpdater();
         currentTimeDDuration =
             musicTrackElem.currentTime / musicTrackElem.duration;
         audioDurationBarElem.style.width =
@@ -438,6 +440,7 @@ changeDurationSelectorDress.addEventListener("mouseup", (e) => {
     musicDurationBarSelectorElem.style.backgroundColor = "#ffbc6a";
 });
 changeDurationSelectorDress.addEventListener("mousemove", (e) => {
+    audioDurationBarContainerWidthUpdater();
     audioDurationBarExactWidth =
         e.pageX - (e.target.offsetWidth - audioDurationBarContainerWidth) / 2;
     if (
@@ -465,4 +468,9 @@ changeDurationSelectorDress.addEventListener("mousemove", (e) => {
         musicTrackElem.currentTime = musicTrackElem.duration;
     }
 });
+function audioDurationBarContainerWidthUpdater() {
+    audioDurationBarContainerWidth = $.querySelector(
+        ".duration-bar-container"
+    ).offsetWidth;
+}
 volumeProperIconHandler();

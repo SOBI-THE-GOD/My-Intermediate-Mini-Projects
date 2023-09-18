@@ -19,7 +19,7 @@ html {
 }
 ::-webkit-scrollbar-thumb {
     background-color: #000000;
-    border-radius: 100px;
+    border-radius: 100rem;
 }
 ::-webkit-scrollbar-thumb:active {
     background-color: #7e7e7e;
@@ -29,7 +29,7 @@ a {
 }
 body {
     position: relative;
-    height: 300vh;
+    min-height: 300vh;
 }
 #nav-bar-container {
     position: sticky;
@@ -40,7 +40,7 @@ body {
 .nav-bar {
     display: flex;
     align-items: center;
-    column-gap: 9rem;
+    column-gap: 10.5vw;
     justify-content: space-evenly;
     font-size: 1.7rem;
     color: #000000;
@@ -52,7 +52,7 @@ body {
 .scrolled-nav-bar {
     margin-inline: 3rem;
     backdrop-filter: blur(10px);
-    border-radius: 100px;
+    border-radius: 100rem;
     box-shadow: 0 0 20px 1px #00000047;
 }
 .first-list-item {
@@ -68,7 +68,7 @@ body {
 #sign-in-button {
     color: #000000;
     padding: 0.5rem 1rem;
-    border-radius: 100px;
+    border-radius: 100rem;
     transition: all 0.3s ease-out;
     position: relative;
 }
@@ -77,7 +77,7 @@ body {
     background-color: #ff7ef1;
     width: 90%;
     height: 100%;
-    border-radius: 100px;
+    border-radius: 100rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -278,7 +278,7 @@ body {
     height: 12.6rem;
     top: 0;
     border-radius: 200rem;
-    left: -115%;
+    left: -106%;
     display: none;
     z-index: 500;
 }
@@ -317,7 +317,7 @@ body {
     flex-direction: column;
     position: absolute;
     bottom: 164%;
-    transform: translateX(-8%);
+    transform: translateX(-7.5%);
     display: none;
 }
 .play-back-rate-options-container > :first-child {
