@@ -11,6 +11,7 @@ let finalResultIndex = 0;
 let correctImputValue = false;
 let convertToC = false;
 let finalResult = "";
+let isAlertVisible = false;
 convertButton.addEventListener("click", converter);
 function converter() {
     finalTemprature = tempInput.value;
@@ -53,16 +54,31 @@ function converter() {
             resultElem.style.display = "block";
         }
     } else {
+        if (isAlertVisible) {
+            setTimeout(() => {
+                alertElem.style.animation = "OpacityDown 0.4s ease";
+            }, 4000);
+            setTimeout(() => {
+                $.getElementById("alert").style.display = "none";
+                isAlertVisible = false;
+            }, 4400);
+        } else {
+            alertElem.style.animation = "OpacityUp 0.4s ease";
+            alertElem.style.display = "block";
+            setTimeout(() => {
+                if (!isAlertVisible) {
+                    alertElem.style.animation = "OpacityDown 0.4s ease";
+                }
+            }, 4000);
+            setTimeout(() => {
+                if (!isAlertVisible) {
+                    $.getElementById("alert").style.display = "none";
+                    isAlertVisible = false;
+                }
+            }, 4400);
+            isAlertVisible = true;
+        }
         correctImputValue = false;
-        alertElem.style.animation = "OpacityUp 0.4s ease";
-        alertElem.style.display = "block";
-        setTimeout(() => {
-            alertElem.style.animation = "OpacityDown 0.4s ease";
-            setTimeout(
-                () => ($.getElementById("alert").style.display = "none"),
-                400
-            );
-        }, 4000);
     }
 }
 changeButton.addEventListener("click", () => {
