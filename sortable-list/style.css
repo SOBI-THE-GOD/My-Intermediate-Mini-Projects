@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    width: 0.7vw;
+    height: 1vh;
+}
+::-webkit-scrollbar-track {
+    background-color: #fff;
+    margin-block: 2rem;
+    border-radius: 100rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 100rem;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #7e7e7e;
+}
+body {
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Lato", sans-serif;
+    background-color: #f9f988;
+    position: relative;
+}
+.title {
+    text-transform: uppercase;
+    width: 64vw;
+    letter-spacing: 0.3rem;
+    padding: 1.6rem;
+    border-radius: 0.6rem;
+    background-color: #fff;
+    font-size: 2.35rem;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 0 10px 0 #00000096;
+}
+.list-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 28vw;
+    height: fit-content;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    list-style: none;
+    row-gap: 0.8rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 0 #00000096;
+}
+.list-item {
+    display: flex;
+    padding-block: 0.8rem;
+    padding-inline: 0.55rem;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid #00000073;
+    border-radius: 0.3rem;
+    align-items: center;
+    margin-left: 4.3rem;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden;
+    transition: scale 0.1s ease, box-shadow 0.15s ease, border 0.3s ease;
+}
+.list-item.hover,
+.index.hover {
+    scale: 1.04;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.3);
+    border: 2px solid #000;
+}
+.list-item.dragging :where(.flag, .item-name, .item-icon) {
+    opacity: 0;
+}
+.list-item.not-hover {
+    scale: 1;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    border: 2px solid #00000073;
+}
+.list-item:active {
+    scale: 1;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    border: 2px solid #00000073;
+}
+.flag {
+    position: absolute;
+    height: 100%;
+    left: 70%;
+    translate: -50% 0;
+    opacity: 0.8;
+    border-radius: 0.2rem;
+    width: 25.33915992695017%;
+}
+.item-icon {
+    font-size: 1.4rem;
+    cursor: grab;
+}
+.item-icon:active {
+    cursor: grabbing;
+}
+.item-name {
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-size: 1.4rem;
+}
+#button {
+    margin-top: 2rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 100rem;
+    padding: 1.2rem 1.5rem;
+    background-color: #fff;
+    font-size: 1.6rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+#button:hover {
+    translate: 0 -3px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.3);
+}
+#button:active {
+    translate: 0 1px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.button-animate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    scale: 0;
+    box-shadow: inset 0 0 20px 20px rgba(0, 0, 0, 1);
+    translate: -50% -50%;
+    width: 40rem;
+    height: 40rem;
+    border-radius: 100rem;
+    animation: animateButton 1.5s backwards;
+}
+@keyframes animateButton {
+    0% {
+        opacity: 0.6;
+        scale: 0;
+    }
+    100% {
+        opacity: 0;
+        scale: 1;
+    }
+}
+.sort-index {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 54.85%;
+    left: 39.6%;
+    row-gap: 0.83rem;
+    z-index: 2;
+    translate: -50% -50%;
+}
+.index {
+    width: 3.7rem;
+    height: 3.516rem;
+    border-radius: 50%;
+    border: 2px solid #00000073;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+}
