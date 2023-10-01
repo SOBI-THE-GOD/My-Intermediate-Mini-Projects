@@ -89,7 +89,7 @@ html {
 .delete-icon {
     font-size: 1.8125rem !important;
     cursor: pointer;
-    color: #000000;
+    color: #fff;
     transition: all 0.4s ease-in-out;
 }
 .delete-container {
