@@ -1,4 +1,6 @@
 const $ = document;
+const toDoContainerElement = $.querySelector(".todo-container");
+toDoContainerElement.innerHTML = localStorage.getItem("todos");
 let toDoDoneBox = $.querySelectorAll(".done");
 let toDoDoneCircle = $.querySelectorAll(".done-circle");
 let toDoDoneIcon = $.querySelectorAll(".done-icon");
@@ -68,7 +70,7 @@ addButtonElem.addEventListener("mouseup", (event) => {
                 event.target.previousElementSibling.value.trim();
             toDoIndexUpdater();
             toDoIndexChildSpan.innerHTML = toDoIndexNum;
-            $.querySelector(".todo-container").append(toDoDiv);
+            toDoContainerElement.append(toDoDiv);
             $.getElementById("h1-title").innerHTML = "YOUR TODOS";
             deleteEventListenerUpdater();
             eventListenerDonesUpdater();
@@ -139,7 +141,7 @@ function deleteToDoHandler(event) {
         event.target.parentElement.parentElement.parentElement.remove();
         toDoIndexHandler();
         toDoIndexUpdater();
-        if ($.querySelector(".todo-container").childElementCount <= 2) {
+        if (toDoContainerElement.childElementCount <= 2) {
             $.getElementById("h1-title").innerHTML = "ADD NEW TODO";
         } else {
             $.getElementById("h1-title").innerHTML = "YOUR TODOS";
@@ -154,7 +156,7 @@ function toDoIndexUpdater() {
     });
 }
 function toDoIndexHandler() {
-    toDoChildCount = $.querySelector(".todo-container").childElementCount - 2;
+    toDoChildCount = toDoContainerElement.childElementCount - 2;
 }
 function eventListenerDonesUpdater() {
     toDoDoneBox = $.querySelectorAll(".done");
@@ -327,3 +329,6 @@ function inputSizeController(event) {
         }
     }
 }
+window.onbeforeunload = () => {
+    localStorage.setItem("todos", toDoContainerElement.innerHTML);
+};
