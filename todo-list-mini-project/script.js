@@ -103,7 +103,7 @@ addButtonElem.addEventListener("mouseup", (event) => {
         $.getElementById("close-add-box").children[0].style.display = "block";
         setTimeout(() => {
             event.target.parentElement.style.animation = null;
-            event.target.parentElement.style.width = "39vw";
+            event.target.parentElement.style.width = "33.295625rem";
         }, 300);
     }
 });
@@ -162,148 +162,141 @@ function eventListenerDonesUpdater() {
     toDoDoneIcon = $.querySelectorAll(".done-icon");
     Array.from(toDoDoneBox).forEach((element) => {
         element.addEventListener("mousedown", doneMouseDownHandler);
-        element.addEventListener("mouseup", doneMouseUpHandler);
     });
     Array.from(toDoDoneCircle).forEach((element) => {
         element.addEventListener("mousedown", doneCircleMouseDownHandler);
-        element.addEventListener("mouseup", doneCircleMouseUpHandler);
     });
     Array.from(toDoDoneIcon).forEach((element) => {
         element.addEventListener("mousedown", doneIconleMouseDownHandler);
-        element.addEventListener("mouseup", doneIconeMouseUpHandler);
     });
 }
 eventListenerDonesUpdater();
-function doneIconleMouseDownHandler(event) {
-    event.target.style.animation = "doneAnim .4s linear";
-    if (event.target.parentElement.getAttribute("id") === "todo-done") {
-        event.target.parentElement.style.animation =
+function doneItemsRemoveAddEventListenersHandler() {
+    [...toDoDoneBox].forEach((elem) => {
+        elem.removeEventListener("mousedown", doneMouseDownHandler);
+    });
+    [...toDoDoneCircle].forEach((elem) => {
+        elem.removeEventListener("mousedown", doneCircleMouseDownHandler);
+    });
+    [...toDoDoneIcon].forEach((elem) => {
+        elem.removeEventListener("mousedown", doneIconleMouseDownHandler);
+    });
+    setTimeout(() => {
+        [...toDoDoneBox].forEach((elem) => {
+            elem.addEventListener("mousedown", doneMouseDownHandler);
+        });
+        [...toDoDoneCircle].forEach((elem) => {
+            elem.addEventListener("mousedown", doneCircleMouseDownHandler);
+        });
+        [...toDoDoneIcon].forEach((elem) => {
+            elem.addEventListener("mousedown", doneIconleMouseDownHandler);
+        });
+    }, 405);
+}
+function doneIconleMouseDownHandler() {
+    this.style.animation = "doneAnim .4s linear";
+    doneItemsRemoveAddEventListenersHandler();
+    if (this.parentElement.getAttribute("id") === "todo-done") {
+        this.parentElement.style.animation =
             "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
-            event.target.parentElement.parentElement.style.backgroundColor =
+            this.parentElement.parentElement.style.backgroundColor = "#00DFA2";
+            this.style.color = "#00DFA2";
+            this.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#00DFA2";
-            event.target.style.color = "#00DFA2";
-            event.target.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
-            event.target.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
-                "#00DFA2";
+            this.parentElement.removeAttribute("id");
+            this.style.animation = null;
         }, 400);
     } else {
-        event.target.parentElement.style.animation =
+        this.parentElement.style.animation =
             "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
-            event.target.parentElement.parentElement.style.backgroundColor =
+            this.parentElement.parentElement.style.backgroundColor = "#fc3a52";
+            this.style.color = "#fc3a52";
+            this.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#fc3a52";
-            event.target.style.color = "#fc3a52";
-            event.target.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
-            event.target.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
-                "#fc3a52";
+            this.parentElement.setAttribute("id", "todo-done");
+            this.style.animation = null;
         }, 400);
     }
-    if (event.target.innerHTML === "done") {
-        event.target.innerHTML = "close";
+    if (this.innerHTML === "done") {
+        this.innerHTML = "close";
     } else {
-        event.target.innerHTML = "done";
+        this.innerHTML = "done";
     }
 }
-function doneIconeMouseUpHandler(event) {
-    setTimeout(() => {
-        if (event.target.parentElement.getAttribute("id") === "todo-done") {
-            event.target.parentElement.removeAttribute("id");
-            // event.target.parentElement.style.translate = '137%' ;
-        } else {
-            event.target.parentElement.setAttribute("id", "todo-done");
-            // event.target.parentElement.style.translate = '0' ;
-        }
-        event.target.style.animation = null;
-    }, 400);
-}
-function doneCircleMouseDownHandler(event) {
-    event.target.children[0].style.animation = "doneAnim .4s linear";
-    if (event.target.getAttribute("id") === "todo-done") {
-        event.target.style.animation = "doneAnimToRight .4s linear forwards";
+function doneCircleMouseDownHandler() {
+    this.children[0].style.animation = "doneAnim .4s linear";
+    doneItemsRemoveAddEventListenersHandler();
+    if (this.getAttribute("id") === "todo-done") {
+        this.style.animation = "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
-            event.target.parentElement.style.backgroundColor = "#00DFA2";
-            event.target.children[0].style.color = "#00DFA2";
-            event.target.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.parentElement.style.backgroundColor = "#00DFA2";
+            this.children[0].style.color = "#00DFA2";
+            this.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#00DFA2";
-            event.target.parentElement.previousElementSibling.children[0].style.backgroundColor =
+            this.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
+            this.removeAttribute("id");
+            this.children[0].style.animation = null;
         }, 400);
     } else {
-        event.target.style.animation = "doneAnimToLeft .4s linear forwards";
+        this.style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
-            event.target.parentElement.style.backgroundColor = "#fc3a52";
-            event.target.children[0].style.color = "#fc3a52";
-            event.target.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.parentElement.style.backgroundColor = "#fc3a52";
+            this.children[0].style.color = "#fc3a52";
+            this.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#fc3a52";
-            event.target.parentElement.previousElementSibling.children[0].style.backgroundColor =
+            this.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
+            this.setAttribute("id", "todo-done");
+            this.children[0].style.animation = null;
         }, 400);
     }
-    if (event.target.children[0].innerHTML === "done") {
-        event.target.children[0].innerHTML = "close";
+    if (this.children[0].innerHTML === "done") {
+        this.children[0].innerHTML = "close";
     } else {
-        event.target.children[0].innerHTML = "done";
+        this.children[0].innerHTML = "done";
     }
 }
-function doneCircleMouseUpHandler(event) {
-    setTimeout(() => {
-        if (event.target.getAttribute("id") === "todo-done") {
-            event.target.removeAttribute("id");
-            // event.target.parentElement.style.translate = '137%' ;
-        } else {
-            event.target.setAttribute("id", "todo-done");
-            // event.target.parentElement.style.translate = '0' ;
-        }
-        event.target.children[0].style.animation = null;
-    }, 400);
-}
-function doneMouseDownHandler(event) {
-    console.log("done");
-    event.target.children[0].children[0].style.animation =
-        "doneAnim .4s linear";
-    if (event.target.children[0].getAttribute("id") === "todo-done") {
-        event.target.children[0].style.animation =
+function doneMouseDownHandler() {
+    this.children[0].children[0].style.animation = "doneAnim .4s linear";
+    doneItemsRemoveAddEventListenersHandler();
+    if (this.children[0].getAttribute("id") === "todo-done") {
+        this.children[0].style.animation =
             "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
-            event.target.style.backgroundColor = "#00DFA2";
-            event.target.children[0].children[0].style.color = "#00DFA2";
-            event.target.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.style.backgroundColor = "#00DFA2";
+            this.children[0].children[0].style.color = "#00DFA2";
+            this.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#00DFA2";
-            event.target.previousElementSibling.children[0].style.backgroundColor =
+            this.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
+            this.children[0].removeAttribute("id");
+            this.children[0].children[0].style.animation = null;
         }, 400);
     } else {
-        event.target.children[0].style.animation =
-            "doneAnimToLeft .4s linear forwards";
+        this.children[0].style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
-            event.target.style.backgroundColor = "#fc3a52";
-            event.target.children[0].children[0].style.color = "#fc3a52";
-            event.target.previousElementSibling.previousElementSibling.children[0].style.color =
+            this.style.backgroundColor = "#fc3a52";
+            this.children[0].children[0].style.color = "#fc3a52";
+            this.previousElementSibling.previousElementSibling.children[0].style.color =
                 "#fc3a52";
-            event.target.previousElementSibling.children[0].style.backgroundColor =
+            this.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
+            this.children[0].setAttribute("id", "todo-done");
+            this.children[0].children[0].style.animation = null;
         }, 400);
     }
-    if (event.target.children[0].children[0].innerHTML === "done") {
-        event.target.children[0].children[0].innerHTML = "close";
+    if (this.children[0].children[0].innerHTML === "done") {
+        this.children[0].children[0].innerHTML = "close";
     } else {
-        event.target.children[0].children[0].innerHTML = "done";
+        this.children[0].children[0].innerHTML = "done";
     }
-}
-function doneMouseUpHandler(event) {
-    setTimeout(() => {
-        if (event.target.children[0].getAttribute("id") === "todo-done") {
-            event.target.children[0].removeAttribute("id");
-            // event.target.parentElement.style.translate = '137%' ;
-        } else {
-            event.target.children[0].setAttribute("id", "todo-done");
-            // event.target.parentElement.style.translate = '0' ;
-        }
-        event.target.children[0].children[0].style.animation = null;
-    }, 400);
 }
 const toDoInputElems = $.querySelectorAll(".todo-input-boxes");
 Array.from(toDoInputElems).forEach((element) => {

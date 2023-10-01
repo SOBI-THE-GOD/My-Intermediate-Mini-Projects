@@ -3,57 +3,77 @@
     padding: 0;
     box-sizing: border-box;
 }
+::-webkit-scrollbar {
+    width: 0.7vw;
+    height: 1vh;
+}
+::-webkit-scrollbar-track {
+    background-color: #000;
+    border-radius: 100rem;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ffd557;
+    border-radius: 100rem;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #ffe495;
+}
 body {
     font-family: sans-serif;
     width: 100vw;
     height: 100dvh;
+    padding-top: 6rem;
+    padding-bottom: 55rem;
     position: relative;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
 }
 html {
     --s: 400px; /* control the size */
-    --c1: #FFE7A0;
-    --c2: #30A2FF;
+    --c1: #ffe7a0;
+    --c2: #30a2ff;
 
-    --_g: 
-        var(--c1) 0%  5% ,var(--c2) 6%  15%,var(--c1) 16% 25%,var(--c2) 26% 35%,var(--c1) 36% 45%,
-        var(--c2) 46% 55%,var(--c1) 56% 65%,var(--c2) 66% 75%,var(--c1) 76% 85%,var(--c2) 86% 95%,
-        #0000 96%;
-    background:
-        radial-gradient(50% 50% at 100% 0,var(--_g)),
-        radial-gradient(50% 50% at 0 100%,var(--_g)),
-        radial-gradient(50% 50%,var(--_g)),
-        radial-gradient(50% 50%,var(--_g)) calc(var(--s)/2) calc(var(--s)/2)
-        var(--c1);
-        background-size: var(--s) var(--s);
+    --_g: var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%,
+        var(--c2) 26% 35%, var(--c1) 36% 45%, var(--c2) 46% 55%,
+        var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%,
+        var(--c2) 86% 95%, #0000 96%;
+    background: radial-gradient(50% 50% at 100% 0, var(--_g)),
+        radial-gradient(50% 50% at 0 100%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)),
+        radial-gradient(50% 50%, var(--_g)) calc(var(--s) / 2)
+            calc(var(--s) / 2) var(--c1);
+    background-size: var(--s) var(--s);
 }
 .todo-container {
     background-color: #00d1ffbd;
     /* backdrop-filter: blur(6px); */
-    padding: 20px;
-    position: absolute;
-    width: 44%;
+    padding: 1.25rem;
+    width: 37.564375rem;
     height: fit-content;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    border-radius: 16px;
+    position: relative;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    row-gap: 15px;
+    row-gap: 0.9375rem;
     box-shadow: 0 0 20px 0px #0000009c;
+}
+#h1-title {
+    text-transform: uppercase;
 }
 .todo-container div {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     column-gap: 10px;
-    align-items : center ;
+    align-items: center;
 }
-.todo-element , .todo-describe {
-    padding: 8px 16px;
+.todo-element,
+.todo-describe {
+    padding: 0.5rem 1rem;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,25 +84,25 @@ html {
     min-width: 10vw;
     text-align: center;
     cursor: pointer;
-    color: #000000;
+    color: #fff;
 }
 .delete-icon {
-    font-size: 29px!important;
+    font-size: 1.8125rem !important;
     cursor: pointer;
     color: #000000;
-    transition: all .4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 .delete-container {
     padding: 2px;
-    width: 3.5vw;
-    height: 7vh;
+    width: 2.9875rem;
+    height: 2.8475rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .delete-icon:hover {
-    animation: deleteIconAnim .4s ease-in-out forwards;
-    font-size: 40px!important;
+    animation: deleteIconAnim 0.4s ease-in-out forwards;
+    font-size: 2.5rem !important;
     color: #fc3a52;
     translate: 0 -3px;
 }
@@ -95,7 +115,6 @@ html {
     }
     33% {
         transform: rotateZ(20deg);
-        
     }
     66% {
         transform: rotateZ(-20deg);
@@ -105,19 +124,20 @@ html {
     }
 }
 .todo-describe-container {
-    width: 24vw;
+    width: 19.608125rem;
     padding: 0;
+    color: #fff;
 }
-.done-icon  {
-    font-size: 22px;
+.done-icon {
+    font-size: 1.375rem;
     font-weight: 900;
     color: #fc3a52;
 }
 
 .done {
     background-color: #fc3a52;
-    width: 13%;
-    height: 5vh;
+    width: 4.3625rem;
+    height: 2.034375rem;
     padding: 0 1%;
     border-radius: 100px;
     position: relative;
@@ -128,13 +148,13 @@ html {
 .done-circle {
     position: absolute;
     padding: 2px;
-    height: 3.8vh;
-    width: 3.8vh;
+    height: 1.545625rem;
+    width: 1.545625rem;
     align-items: center;
     border-radius: 50%;
     translate: 0;
     cursor: pointer;
-    background-color: #ffffff!important;
+    background-color: #ffffff !important;
 }
 
 @keyframes doneAnim {
@@ -166,34 +186,34 @@ html {
 }
 .todo-index-circle {
     background-color: #ffffff;
-    width: 2.8vw;
-    height: 2.8vw;
+    width: 2.389375rem;
+    height: 2.389375rem;
     border-radius: 50%;
     color: #fc3a52;
     display: flex;
     font-weight: 900;
     justify-content: center;
-    font-size: 25px;
+    font-size: 1.5625rem;
     align-items: center;
 }
 .add-box-button {
-    background-color: #FFE7A0;
-    width: 3.813vw;
-    box-shadow: 0 0 20px 0 #00000096;;
+    background-color: #ffe7a0;
+    width: 3.255rem;
+    box-shadow: 0 0 20px 0 #00000096;
     border-radius: 50%;
-    height: 8vh;
-    font-size: 20px;
+    height: 3.255rem;
+    font-size: 1.25rem;
     font-weight: 700;
     position: absolute;
     align-self: flex-end;
     cursor: pointer;
-    left: -28%;
-    top: -32%;
-    transition: all .4s ease-in-out , translate .2s ease-in-out;
+    left: -20%;
+    top: -21%;
+    transition: all 0.4s ease-in-out, translate 0.2s ease-in-out;
 }
 .add-box-button:hover {
     background-color: #ffffff;
-    translate : 0 -3px;
+    translate: 0 -3px;
 }
 .add-box-button:active {
     translate: 0 -1px;
@@ -206,58 +226,61 @@ div .add-box-container {
     width: 0;
     height: fit-content;
     position: absolute;
-    top: 110%;
+    top: 113%;
     padding: 3%;
     display: flex;
     row-gap: 15%;
-    left: 4.5%;
-    border-radius: 35px;
+    left: 5.35%;
+    border-radius: 2.1875rem;
     flex-direction: column;
     box-shadow: 0 0 20px 0px black;
     align-items: center;
     justify-content: center;
 }
 #add-todo-subject {
-    padding: 8px 16px;
+    padding: 0.5rem 1rem;
     border: none;
     outline: none;
-    border-radius: 100px;
-    font-size: 20px;
+    border-radius: 6.25rem;
+    font-size: 1.25rem;
     text-align: center;
-    background-image: linear-gradient(to right , #ffffff 50%, #FFE7A0 50%);
+    background-image: linear-gradient(to right, #ffffff 50%, #ffe7a0 50%);
     background-size: 200%;
     background-position: right;
     height: 4ch;
     width: 17ch;
     display: none;
     margin-bottom: 6%;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
-#todo-detail-text-area{
-    padding: 10px 16px;
+#todo-detail-text-area {
+    padding: 0.625rem 1rem;
     border: none;
     outline: none;
-    border-radius: 100px;
-    font-size: 20px;
+    border-radius: 6.25rem;
+    font-size: 1.25rem;
     text-align: center;
-    background-image: linear-gradient(to right , #ffffff 50%, #FFE7A0 50%);
+    background-image: linear-gradient(to right, #ffffff 50%, #ffe7a0 50%);
     background-size: 200%;
     background-position: right;
     margin-bottom: 6%;
     height: 4ch;
     width: 17ch;
     display: none;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     resize: none;
 }
 .add-box-button:hover {
     background-position: left;
 }
-#add-todo-subject:hover , #add-todo-subject:focus , #todo-detail-text-area:hover , #todo-detail-text-area:focus {
+#add-todo-subject:hover,
+#add-todo-subject:focus,
+#todo-detail-text-area:hover,
+#todo-detail-text-area:focus {
     background-position: left;
     color: #000000;
 }
-#add-todo-subject::placeholder{
+#add-todo-subject::placeholder {
     font-size: 19px;
     color: #000000;
 }
@@ -265,17 +288,17 @@ div .add-box-container {
     color: #000000;
 }
 .todo-describe p {
-    font-size: 16px;
+    font-size: 1rem;
     word-wrap: break-word;
-    font-weight: 700 ;
+    font-weight: 700;
     color: #efefef;
 }
 .todo-container h1 {
     text-align: center;
-    font-size: 70px;
+    font-size: 4.375rem;
     color: #ffd557;
     font-weight: 700;
-    letter-spacing: 4px;
+    letter-spacing: 0.25rem;
 }
 @keyframes deleteOpacityAnim {
     0% {
@@ -287,10 +310,10 @@ div .add-box-container {
 }
 @keyframes borderAnim {
     0% {
-        border-radius: 100px;
+        border-radius: 6.25rem;
     }
     100% {
-        border-radius: 10px;
+        border-radius: 0.625rem;
     }
 }
 @keyframes addBoxOpenWidthAnim {
@@ -298,16 +321,13 @@ div .add-box-container {
         width: 0;
     }
     100% {
-        width: 39vw;
+        width: 33.295625rem;
     }
-};
-/* .open-add-box-animation {
-    animation: addBoxOpenWidthAnim .3s ease forwards;
-} */
+}
 #cancel-add-icon {
     display: none;
 }
-#cancel-add-icon:hover{
+#cancel-add-icon:hover {
     scale: 1.5;
     rotate: 180deg;
 }
@@ -315,11 +335,11 @@ div .add-box-container {
     translate: 0 2px;
 }
 .close-add-box-animation {
-    animation: addBoxCloseWidthAnim .3s ease forwards;
+    animation: addBoxCloseWidthAnim 0.3s ease forwards;
 }
 @keyframes addBoxCloseWidthAnim {
     0% {
-        width: 39vw;
+        width: 33.295625rem;
     }
     100% {
         width: 0;
