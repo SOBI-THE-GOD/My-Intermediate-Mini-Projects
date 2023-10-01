@@ -1,6 +1,11 @@
 const $ = document;
 const toDoContainerElement = $.querySelector(".todo-container");
-toDoContainerElement.innerHTML = localStorage.getItem("todos");
+if (
+    localStorage.getItem("usertodos") !== null &&
+    localStorage.getItem("usertodos").length >= 879
+) {
+    toDoContainerElement.innerHTML = localStorage.getItem("usertodos");
+}
 let toDoDoneBox = $.querySelectorAll(".done");
 let toDoDoneCircle = $.querySelectorAll(".done-circle");
 let toDoDoneIcon = $.querySelectorAll(".done-icon");
@@ -330,5 +335,5 @@ function inputSizeController(event) {
     }
 }
 window.onbeforeunload = () => {
-    localStorage.setItem("todos", toDoContainerElement.innerHTML);
+    localStorage.setItem("usertodos", toDoContainerElement.innerHTML);
 };
