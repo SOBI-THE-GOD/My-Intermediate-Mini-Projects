@@ -1,0 +1,14 @@
+{
+    "name": "design-with-dark-light-theme",
+    "version": "1.0.0",
+    "description": "",
+    "main": "script.js",
+    "scripts": {
+        "compile:sass": "node-sass sass/style.scss css/style.css -w"
+    },
+    "author": "SOBI-THE-God",
+    "license": "ISC",
+    "devDependencies": {
+        "node-sass": "^9.0.0"
+    }
+}
