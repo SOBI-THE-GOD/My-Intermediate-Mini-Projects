@@ -4,7 +4,7 @@
     "description": "",
     "main": "script.js",
     "scripts": {
-        "compile:sass": "node-sass sass/style.scss css/style.css -w"
+        "compile:scss": "node-sass scss/style.scss css/style.css -w"
     },
     "author": "SOBI-THE-God",
     "license": "ISC",
