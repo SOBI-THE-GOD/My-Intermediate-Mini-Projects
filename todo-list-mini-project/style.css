@@ -156,18 +156,6 @@ html {
     cursor: pointer;
     background-color: #ffffff !important;
 }
-
-@keyframes doneAnim {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 @keyframes doneAnimToRight {
     0% {
         translate: 0;

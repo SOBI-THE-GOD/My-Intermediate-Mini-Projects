@@ -1,11 +1,8 @@
 const $ = document;
 const toDoContainerElement = $.querySelector(".todo-container");
-if (
-    localStorage.getItem("usertodos") !== null &&
-    localStorage.getItem("usertodos").length >= 879
-) {
-    toDoContainerElement.innerHTML = localStorage.getItem("usertodos");
-}
+let todosArr = [];
+const toDoSubjectInputElem = $.getElementById("add-todo-subject");
+const toDoDetailInputElem = $.getElementById("todo-detail-text-area");
 let toDoDoneBox = $.querySelectorAll(".done");
 let toDoDoneCircle = $.querySelectorAll(".done-circle");
 let toDoDoneIcon = $.querySelectorAll(".done-icon");
@@ -21,61 +18,15 @@ addButtonElem.addEventListener("mouseup", (event) => {
                 .length > 0
         ) {
             isAddBoxOpen = false;
-            let toDoDiv = $.createElement("div");
-            toDoDiv.classList.add("todo");
-            let toDoIndexSpan = $.createElement("span");
-            toDoIndexSpan.classList.add("todo-element", "todo-index");
-            toDoDiv.append(toDoIndexSpan);
-            let toDoIndexChildSpan = $.createElement("span");
-            toDoIndexChildSpan.classList.add("todo-index-circle");
-            toDoIndexSpan.append(toDoIndexChildSpan);
-            let toDoDescribeSpan = $.createElement("span");
-            toDoDescribeSpan.classList.add(
-                "todo-element",
-                "todo-describe-container"
-            );
-            toDoDiv.append(toDoDescribeSpan);
-            let toDoDetails = $.createElement("details");
-            toDoDetails.classList.add("todo-describe");
-            toDoDescribeSpan.append(toDoDetails);
-            let toDoSummaryElem = $.createElement("summary");
-            toDoDetails.append(toDoSummaryElem);
-            let toDoDetailParagraph = $.createElement("p");
-            toDoDetails.append(toDoDetailParagraph);
-            let toDoDoneSpanElem = $.createElement("span");
-            toDoDoneSpanElem.classList.add("todo-element", "done");
-            toDoDiv.append(toDoDoneSpanElem);
-            let toDoDoneCircleDiv = $.createElement("div");
-            toDoDoneCircleDiv.classList.add("done-circle");
-            toDoDoneCircleDiv.setAttribute("id", "todo-done");
-            toDoDoneSpanElem.append(toDoDoneCircleDiv);
-            let toDoIconSpan = $.createElement("span");
-            toDoIconSpan.classList.add(
-                "material-symbols-outlined",
-                "done-icon"
-            );
-            toDoIconSpan.innerHTML = "close";
-            toDoDoneCircleDiv.append(toDoIconSpan);
-            let toDoDeleteSpan = $.createElement("span");
-            toDoDeleteSpan.classList.add("todo-element", "delete-todo");
-            toDoDiv.append(toDoDeleteSpan);
-            let toDoDeleteContainerSpan = $.createElement("span");
-            toDoDeleteContainerSpan.classList.add("delete-container");
-            toDoDeleteSpan.append(toDoDeleteContainerSpan);
-            let toDoDeleteIconSpan = $.createElement("span");
-            toDoDeleteIconSpan.classList.add(
-                "material-symbols-outlined",
-                "delete-icon"
-            );
-            toDoDeleteIconSpan.innerHTML = "delete";
-            toDoDeleteContainerSpan.append(toDoDeleteIconSpan);
-            toDoSummaryElem.innerHTML =
-                event.target.previousElementSibling.previousElementSibling.value.trim();
-            toDoDetailParagraph.innerHTML =
-                event.target.previousElementSibling.value.trim();
             toDoIndexUpdater();
-            toDoIndexChildSpan.innerHTML = toDoIndexNum;
-            toDoContainerElement.append(toDoDiv);
+            todosArrayAdder();
+            console.log(todosArr);
+            toDoGenerator(
+                toDoIndexNum,
+                toDoSubjectInputElem.value.trim(),
+                toDoDetailInputElem.value.trim(),
+                false
+            );
             $.getElementById("h1-title").innerHTML = "YOUR TODOS";
             deleteEventListenerUpdater();
             eventListenerDonesUpdater();
@@ -114,6 +65,63 @@ addButtonElem.addEventListener("mouseup", (event) => {
         }, 300);
     }
 });
+function localStorageToDoArrayUpdater() {
+    localStorage.setItem("usertodos", JSON.stringify(todosArr));
+}
+function toDoGenerator(toDoIndex, toDoSubject, toDoDetail, toDoStatus) {
+    let toDoDiv = $.createElement("div");
+    toDoDiv.classList.add("todo");
+    toDoDiv.innerHTML = `
+            <span class="todo-element todo-index">
+                <span class="todo-index-circle">${toDoIndex}</span>
+            </span>
+            <span class="todo-element todo-describe-container">
+                <details class="todo-describe">
+                    <summary>${toDoSubject}</summary>
+                    <p>${toDoDetail}</p>
+                </details>
+            </span>
+            <span class="todo-element done" >
+                <div class="done-circle" id="todo-done">
+                    <span class="material-symbols-outlined done-icon" >close</span>
+                </div>
+            </span>
+            <span class="todo-element delete-todo">
+                <span class="delete-container">
+                    <span class="material-symbols-outlined delete-icon">delete</span>
+                </span>
+            </span>`;
+    let doneSpan = toDoDiv.querySelector(".done");
+    let doneCircle = toDoDiv.querySelector(".done-circle");
+    let doneIcon = toDoDiv.querySelector(".done-icon");
+    let indexCircle = toDoDiv.querySelector(".todo-index-circle");
+    let toDoDescribe = toDoDiv.querySelector(".todo-describe");
+    if (toDoStatus) {
+        doneCircle.style.animation = "doneAnimToRight .4s linear forwards";
+        doneSpan.style.backgroundColor = "#00DFA2";
+        doneIcon.style.color = "#00DFA2";
+        indexCircle.style.color = "#00DFA2";
+        toDoDescribe.style.backgroundColor = "#00DFA2";
+        doneCircle.removeAttribute("id");
+    } else {
+        doneCircle.style.animation = "doneAnimToLeft .4s linear forwards";
+        doneSpan.style.backgroundColor = "#fc3a52";
+        doneIcon.style.color = "#fc3a52";
+        indexCircle.style.color = "#fc3a52";
+        toDoDescribe.style.backgroundColor = "#fc3a52";
+        doneCircle.setAttribute("id", "todo-done");
+    }
+    toDoContainerElement.append(toDoDiv);
+}
+function todosArrayAdder() {
+    todosArr.push({
+        toDoIndex: toDoIndexNum,
+        toDoSubject: toDoSubjectInputElem.value.trim(),
+        toDoDetail: toDoDetailInputElem.value.trim(),
+        isToDoDone: false,
+    });
+    localStorageToDoArrayUpdater();
+}
 $.getElementById("cancel-add-icon").addEventListener("mouseup", (event) => {
     isAddBoxOpen = false;
     event.target.parentElement.parentElement.classList.add(
@@ -139,19 +147,35 @@ function deleteEventListenerUpdater() {
     });
 }
 deleteEventListenerUpdater();
-function deleteToDoHandler(event) {
-    event.target.parentElement.parentElement.parentElement.style.animation =
+function deleteToDoHandler() {
+    this.parentElement.parentElement.parentElement.style.animation =
         "deleteOpacityAnim .3s ease-in-out";
     setTimeout(() => {
-        event.target.parentElement.parentElement.parentElement.remove();
+        this.parentElement.parentElement.parentElement.remove();
         toDoIndexHandler();
         toDoIndexUpdater();
+        todosArrayUpdater(this);
         if (toDoContainerElement.childElementCount <= 2) {
             $.getElementById("h1-title").innerHTML = "ADD NEW TODO";
         } else {
             $.getElementById("h1-title").innerHTML = "YOUR TODOS";
         }
     }, 300);
+}
+function todosArrayUpdater(deleteIconElem) {
+    let todoIndex = todosArr.findIndex((todo) => {
+        return (
+            todo.toDoSubject ===
+            deleteIconElem.parentElement.parentElement.previousElementSibling
+                .previousElementSibling.firstElementChild.firstElementChild
+                .innerHTML
+        );
+    });
+    todosArr.splice(todoIndex, 1);
+    todosArr.forEach((todo, index) => {
+        todo.toDoIndex = index + 1;
+    });
+    localStorageToDoArrayUpdater();
 }
 function toDoIndexUpdater() {
     toDoIndexNum = 1;
@@ -200,13 +224,24 @@ function doneItemsRemoveAddEventListenersHandler() {
         });
     }, 405);
 }
+function todoArrayStatusUpdate(toDoSubject, toDoStatus) {
+    let todoIndex = todosArr.findIndex((todo) => {
+        return todo.toDoSubject === toDoSubject.innerHTML;
+    });
+    todosArr[todoIndex].isToDoDone = toDoStatus;
+    localStorageToDoArrayUpdater();
+}
 function doneIconleMouseDownHandler() {
-    this.style.animation = "doneAnim .4s linear";
     doneItemsRemoveAddEventListenersHandler();
     if (this.parentElement.getAttribute("id") === "todo-done") {
         this.parentElement.style.animation =
             "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.parentElement.parentElement.previousElementSibling
+                    .firstElementChild.firstElementChild,
+                true
+            );
             this.parentElement.parentElement.style.backgroundColor = "#00DFA2";
             this.style.color = "#00DFA2";
             this.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -214,12 +249,16 @@ function doneIconleMouseDownHandler() {
             this.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
             this.parentElement.removeAttribute("id");
-            this.style.animation = null;
         }, 400);
     } else {
         this.parentElement.style.animation =
             "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.parentElement.parentElement.previousElementSibling
+                    .firstElementChild.firstElementChild,
+                false
+            );
             this.parentElement.parentElement.style.backgroundColor = "#fc3a52";
             this.style.color = "#fc3a52";
             this.parentElement.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -227,7 +266,6 @@ function doneIconleMouseDownHandler() {
             this.parentElement.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
             this.parentElement.setAttribute("id", "todo-done");
-            this.style.animation = null;
         }, 400);
     }
     if (this.innerHTML === "done") {
@@ -237,11 +275,15 @@ function doneIconleMouseDownHandler() {
     }
 }
 function doneCircleMouseDownHandler() {
-    this.children[0].style.animation = "doneAnim .4s linear";
     doneItemsRemoveAddEventListenersHandler();
     if (this.getAttribute("id") === "todo-done") {
         this.style.animation = "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.parentElement.previousElementSibling.firstElementChild
+                    .firstElementChild,
+                true
+            );
             this.parentElement.style.backgroundColor = "#00DFA2";
             this.children[0].style.color = "#00DFA2";
             this.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -249,11 +291,15 @@ function doneCircleMouseDownHandler() {
             this.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
             this.removeAttribute("id");
-            this.children[0].style.animation = null;
         }, 400);
     } else {
         this.style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.parentElement.previousElementSibling.firstElementChild
+                    .firstElementChild,
+                false
+            );
             this.parentElement.style.backgroundColor = "#fc3a52";
             this.children[0].style.color = "#fc3a52";
             this.parentElement.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -261,7 +307,6 @@ function doneCircleMouseDownHandler() {
             this.parentElement.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
             this.setAttribute("id", "todo-done");
-            this.children[0].style.animation = null;
         }, 400);
     }
     if (this.children[0].innerHTML === "done") {
@@ -271,12 +316,15 @@ function doneCircleMouseDownHandler() {
     }
 }
 function doneMouseDownHandler() {
-    this.children[0].children[0].style.animation = "doneAnim .4s linear";
     doneItemsRemoveAddEventListenersHandler();
     if (this.children[0].getAttribute("id") === "todo-done") {
         this.children[0].style.animation =
             "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.previousElementSibling.firstElementChild.firstElementChild,
+                true
+            );
             this.style.backgroundColor = "#00DFA2";
             this.children[0].children[0].style.color = "#00DFA2";
             this.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -284,11 +332,14 @@ function doneMouseDownHandler() {
             this.previousElementSibling.children[0].style.backgroundColor =
                 "#00DFA2";
             this.children[0].removeAttribute("id");
-            this.children[0].children[0].style.animation = null;
         }, 400);
     } else {
         this.children[0].style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
+            todoArrayStatusUpdate(
+                this.previousElementSibling.firstElementChild.firstElementChild,
+                false
+            );
             this.style.backgroundColor = "#fc3a52";
             this.children[0].children[0].style.color = "#fc3a52";
             this.previousElementSibling.previousElementSibling.children[0].style.color =
@@ -296,7 +347,6 @@ function doneMouseDownHandler() {
             this.previousElementSibling.children[0].style.backgroundColor =
                 "#fc3a52";
             this.children[0].setAttribute("id", "todo-done");
-            this.children[0].children[0].style.animation = null;
         }, 400);
     }
     if (this.children[0].children[0].innerHTML === "done") {
@@ -334,6 +384,23 @@ function inputSizeController(event) {
         }
     }
 }
-window.onbeforeunload = () => {
-    localStorage.setItem("usertodos", toDoContainerElement.innerHTML);
+
+window.onload = () => {
+    if (
+        localStorage.getItem("usertodos") !== null &&
+        JSON.parse(localStorage.getItem("usertodos")).length >= 1
+    ) {
+        todosArr = JSON.parse(localStorage.getItem("usertodos"));
+        $.getElementById("h1-title").innerHTML = "YOUR TODOS";
+        todosArr.forEach((todo) => {
+            toDoGenerator(
+                todo.toDoIndex,
+                todo.toDoSubject,
+                todo.toDoDetail,
+                todo.isToDoDone
+            );
+        });
+        deleteEventListenerUpdater();
+        eventListenerDonesUpdater();
+    }
 };
