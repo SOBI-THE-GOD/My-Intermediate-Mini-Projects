@@ -269,6 +269,7 @@ volumeIconElem.addEventListener("mouseup", () => {
 $.querySelector(".duration-bar-click-dress").addEventListener(
     "mousedown",
     (e) => {
+        musicTrackElem.pause();
         audioDurationBarContainerWidthUpdater();
         musicDurationBarSelectorElem.style.left =
             e.pageX -
@@ -432,10 +433,12 @@ musicDurationBarSelectorElem.addEventListener(
     musicDurationBarSelectorMouseDownHandler
 );
 function musicDurationBarSelectorMouseDownHandler(e) {
+    musicTrackElem.pause();
     e.target.style.backgroundColor = "#ffc681";
     changeDurationSelectorDress.style.display = "block";
 }
 changeDurationSelectorDress.addEventListener("mouseup", (e) => {
+    musicTrackElem.play();
     e.target.style.display = "none";
     musicDurationBarSelectorElem.style.backgroundColor = "#ffbc6a";
 });
