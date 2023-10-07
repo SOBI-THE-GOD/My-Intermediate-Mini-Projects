@@ -104,7 +104,7 @@ function toDoGenerator(toDoIndex, toDoSubject, toDoDetail, toDoStatus) {
         toDoDescribe.style.backgroundColor = "#00DFA2";
         doneCircle.removeAttribute("id");
     } else {
-        doneCircle.style.animation = "doneAnimToLeft .4s linear forwards";
+        // doneCircle.style.animation = "doneAnimToLeft .4s linear forwards";
         doneSpan.style.backgroundColor = "#fc3a52";
         doneIcon.style.color = "#fc3a52";
         indexCircle.style.color = "#fc3a52";
