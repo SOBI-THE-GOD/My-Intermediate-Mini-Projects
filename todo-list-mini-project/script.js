@@ -97,17 +97,18 @@ function toDoGenerator(toDoIndex, toDoSubject, toDoDetail, toDoStatus) {
     let indexCircle = toDoDiv.querySelector(".todo-index-circle");
     let toDoDescribe = toDoDiv.querySelector(".todo-describe");
     if (toDoStatus) {
-        doneCircle.style.animation = "doneAnimToRight .4s linear forwards";
+        doneCircle.style.translate = "137%";
         doneSpan.style.backgroundColor = "#00DFA2";
         doneIcon.style.color = "#00DFA2";
+        doneIcon.innerHTML = "done";
         indexCircle.style.color = "#00DFA2";
         toDoDescribe.style.backgroundColor = "#00DFA2";
         doneCircle.removeAttribute("id");
     } else {
-        // doneCircle.style.animation = "doneAnimToLeft .4s linear forwards";
         doneSpan.style.backgroundColor = "#fc3a52";
         doneIcon.style.color = "#fc3a52";
         indexCircle.style.color = "#fc3a52";
+        doneIcon.innerHTML = "close";
         toDoDescribe.style.backgroundColor = "#fc3a52";
         doneCircle.setAttribute("id", "todo-done");
     }
@@ -224,10 +225,8 @@ function doneItemsRemoveAddEventListenersHandler() {
         });
     }, 405);
 }
-function todoArrayStatusUpdate(toDoSubject, toDoStatus) {
-    let todoIndex = todosArr.findIndex((todo) => {
-        return todo.toDoSubject === toDoSubject.innerHTML;
-    });
+function todoArrayStatusUpdate(toDOIndex, toDoStatus) {
+    let todoIndex = toDOIndex.innerHTML - 1;
     todosArr[todoIndex].isToDoDone = toDoStatus;
     localStorageToDoArrayUpdater();
 }
@@ -239,7 +238,7 @@ function doneIconleMouseDownHandler() {
         setTimeout(() => {
             todoArrayStatusUpdate(
                 this.parentElement.parentElement.previousElementSibling
-                    .firstElementChild.firstElementChild,
+                    .previousElementSibling.firstElementChild,
                 true
             );
             this.parentElement.parentElement.style.backgroundColor = "#00DFA2";
@@ -256,7 +255,7 @@ function doneIconleMouseDownHandler() {
         setTimeout(() => {
             todoArrayStatusUpdate(
                 this.parentElement.parentElement.previousElementSibling
-                    .firstElementChild.firstElementChild,
+                    .previousElementSibling.firstElementChild,
                 false
             );
             this.parentElement.parentElement.style.backgroundColor = "#fc3a52";
@@ -280,7 +279,7 @@ function doneCircleMouseDownHandler() {
         this.style.animation = "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
             todoArrayStatusUpdate(
-                this.parentElement.previousElementSibling.firstElementChild
+                this.parentElement.previousElementSibling.previousElementSibling
                     .firstElementChild,
                 true
             );
@@ -296,7 +295,7 @@ function doneCircleMouseDownHandler() {
         this.style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
             todoArrayStatusUpdate(
-                this.parentElement.previousElementSibling.firstElementChild
+                this.parentElement.previousElementSibling.previousElementSibling
                     .firstElementChild,
                 false
             );
@@ -322,7 +321,8 @@ function doneMouseDownHandler() {
             "doneAnimToRight .4s linear forwards";
         setTimeout(() => {
             todoArrayStatusUpdate(
-                this.previousElementSibling.firstElementChild.firstElementChild,
+                this.previousElementSibling.previousElementSibling
+                    .firstElementChild,
                 true
             );
             this.style.backgroundColor = "#00DFA2";
@@ -337,7 +337,8 @@ function doneMouseDownHandler() {
         this.children[0].style.animation = "doneAnimToLeft .4s linear forwards";
         setTimeout(() => {
             todoArrayStatusUpdate(
-                this.previousElementSibling.firstElementChild.firstElementChild,
+                this.previousElementSibling.previousElementSibling
+                    .firstElementChild,
                 false
             );
             this.style.backgroundColor = "#fc3a52";
