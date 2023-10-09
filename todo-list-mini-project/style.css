@@ -172,6 +172,20 @@ html {
         translate: 0;
     }
 }
+@keyframes doneIconScale {
+    0% {
+        scale: 1;
+    }
+    50% {
+        scale: 0.2;
+    }
+    90% {
+        scale: 1.2;
+    }
+    100% {
+        scale: 1;
+    }
+}
 .todo-index-circle {
     background-color: #ffffff;
     width: 2.389375rem;
