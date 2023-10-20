@@ -439,7 +439,15 @@ function musicDurationBarSelectorMouseDownHandler(e) {
 }
 changeDurationSelectorDress.addEventListener("mouseup", (e) => {
     musicTrackElem.play();
+    isAudioPlayed = true;
+    playButtonElem.classList.remove("fa-play");
+    playButtonElem.classList.add("fa-pause");
+    playButtonElem.style.marginLeft = "0";
     e.target.style.display = "none";
+    audioImageRotateHandler();
+    audioImageBorderHandler();
+    audioCurrentTimeHandler();
+    audioCurrentTimeShowingHandler();
     musicDurationBarSelectorElem.style.backgroundColor = "#ffbc6a";
 });
 changeDurationSelectorDress.addEventListener("mousemove", (e) => {
