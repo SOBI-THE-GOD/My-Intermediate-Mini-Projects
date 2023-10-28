@@ -1,0 +1,66 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 10px;
+    body {
+        height: 100dvh;
+    }
+}
+@mixin flex-centerize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    @include flex-centerize();
+    .brightness-dress{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99999999999;
+        display: none;
+    }
+}
+.container {
+    background-image: url(https://picsum.photos/1920/1080?random);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    @include flex-centerize;
+    .brightness-bar-wrapper{
+        height: 6.5rem;
+        width: 47rem;
+        background-color: rgba($color: #000000, $alpha: .75);
+        box-shadow: 0 0 20px 0px rgba($color: #000000, $alpha: 0.5);
+        border-radius: 100rem;
+        backdrop-filter: blur(4px);
+        overflow: hidden;
+        transition: scale .2s ease;
+        position: relative;
+        backface-visibility: hidden;
+        .brightness-click-dress{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            &:hover {
+                cursor: grab;
+            }
+        }
+        .brightness-bar{
+            height: 100%;
+            width: 100%;
+            backface-visibility: hidden;
+            background-color: #fff;
+            border-radius: 100rem 0 0 100rem;
+        }
+    }
+}
