@@ -7,17 +7,16 @@ const imgNamesArr = [
     "wallhaven-9mjoy1.png",
 ];
 const sliderContainerElem = document.querySelector(".slider-show-container");
-const selectionSlideCircleElemContainer = document.querySelector(
+const slideSelectionButtonsContainer = document.querySelector(
     ".selecetion-buttons-container"
 );
+let slideWidth = 0;
+let silderOutoChangeTimeOut = 0;
+let currentSlideIndex = 0;
+let lastSelectedSlideIndex = 0;
 const toLeftButtonElem = document.querySelector(".left-button");
 const toRightButtonElem = document.querySelector(".right-button");
 const sliderShowWrapperElem = document.querySelector(".slider-show-wrapper");
-let currentSlideNumb = 1;
-let slideWidth;
-let sliderPosition = 0;
-let currentSliderSelectionButtonIndex = 0;
-let silderShowInterval;
 function createSlideElems(imgNamesArr) {
     let newElem;
     let newSelectionSlideCircleElem;
@@ -26,145 +25,96 @@ function createSlideElems(imgNamesArr) {
         newElem.style.cssText = `height : 100vh;
         width : 100vw;
         background-image : url(images/${elem});
-        background-size : cover;`;
+        background-size : cover;
+        background-position : center;`;
         newElem.dataset.slideNumb = index;
         sliderContainerElem.append(newElem);
-        newSelectionSlideCircleElem = document.createElement("span");
-        newSelectionSlideCircleElem.setAttribute("id", `slide-${index + 1}`);
-        newSelectionSlideCircleElem.style.cssText = `width : 2.2rem;
+        newSelectionSlideButtonElem = document.createElement("span");
+        newSelectionSlideButtonElem.style.cssText = `width : 2.2rem;
         height : 2.2rem;
         border-radius: 100rem ;
         background-color : #ffffff;
         transition: width .9s ease;`;
-        newSelectionSlideCircleElem.dataset.slideNumb = index;
+        newSelectionSlideButtonElem.dataset.slideNumb = index;
         if (index === 0) {
-            newSelectionSlideCircleElem.style.width = "4.2rem";
+            newSelectionSlideButtonElem.style.width = "4.2rem";
         }
-        newSelectionSlideCircleElem.addEventListener("click", (e) => {
-            sildesWidthUpdater();
-            selectionSlideCircleElemContainer.children[
-                currentSliderSelectionButtonIndex
-            ].style.width = "2.2rem";
-            currentSlideNumb = +e.target.dataset.slideNumb;
-            currentSliderSelectionButtonIndex = +e.target.dataset.slideNumb;
-            selectionSlideCircleElemContainer.children[
-                currentSliderSelectionButtonIndex
-            ].style.width = "4.2rem";
-            clearInterval(silderShowInterval);
-            silderShowInterval = setInterval(() => {
-                widthAndPositionCalculator();
-                if (currentSlideNumb === imgNamesArr.length - 1) {
-                    setTimeout(() => {
-                        currentSlideNumb = 0;
-                    }, 6000);
-                }
-            }, 6000);
-            sliderPosition = -(slideWidth * currentSlideNumb);
-            sliderShowWrapperElem.style.left = sliderPosition + "px";
-        });
-        selectionSlideCircleElemContainer.append(newSelectionSlideCircleElem);
+        newSelectionSlideButtonElem.addEventListener(
+            "click",
+            slideSelectionButtonsClickHandler
+        );
+        slideSelectionButtonsContainer.append(newSelectionSlideButtonElem);
     });
+    autoChangeSlideHandler();
 }
-function widthAndPositionCalculator() {
-    sildesWidthUpdater();
-    sliderSelectionButtonsStyleHandler();
-    sliderPosition = -(slideWidth * currentSlideNumb);
-    if (currentSlideNumb !== 5) {
-        currentSlideNumb++;
-    }
-    sliderShowWrapperElem.style.left = sliderPosition + "px";
+toLeftButtonElem.addEventListener("click", changingSlideTowardLeft);
+toRightButtonElem.addEventListener("click", changingSlideTowardRIght);
+function slideWidthUpdater() {
+    slideWidth = sliderContainerElem.firstElementChild.offsetWidth;
 }
-function autoSlideChanger() {
-    silderShowInterval = setInterval(() => {
-        widthAndPositionCalculator();
-        if (currentSlideNumb === imgNamesArr.length - 1) {
-            setTimeout(() => {
-                currentSlideNumb = 0;
-            }, 6000);
+function autoChangeSlideHandler() {
+    silderOutoChangeTimeOut = setTimeout(() => {
+        lastSelectedSlideIndex = currentSlideIndex;
+        unselectSlideSelectionButtonStyleHandler(lastSelectedSlideIndex);
+        if (lastSelectedSlideIndex !== imgNamesArr.length - 1) {
+            currentSlideIndex++;
+        } else if (lastSelectedSlideIndex === imgNamesArr.length - 1) {
+            currentSlideIndex = 0;
         }
+        selectSlideSelectionButtonStyleHandler(currentSlideIndex);
+        sliderShowWrapperElem.style.left =
+            sliderContainerPositionCalcuator() + "px";
+        autoChangeSlideHandler();
     }, 6000);
 }
-function sliderSelectionButtonsStyleHandler() {
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "2.2rem";
-    currentSliderSelectionButtonIndex = Array.from(
-        selectionSlideCircleElemContainer.children
-    ).findIndex((elem) => {
-        return +elem.dataset.slideNumb === currentSlideNumb;
-    });
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "4.2rem";
+function unselectSlideSelectionButtonStyleHandler(slideIndex) {
+    slideSelectionButtonsContainer.children[slideIndex].style.width = "2.2rem";
 }
-function sildesWidthUpdater() {
-    slideWidth = sliderContainerElem.children[0].offsetWidth;
+function selectSlideSelectionButtonStyleHandler(slideIndex) {
+    slideSelectionButtonsContainer.children[slideIndex].style.width = "4.2rem";
 }
-toLeftButtonElem.addEventListener("click", () => {
-    sildesWidthUpdater();
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "2.2rem";
-    if (currentSlideNumb - 1 === 0 && currentSliderSelectionButtonIndex === 0) {
-        sliderPosition = -((imgNamesArr.length - 1) * slideWidth);
-        currentSlideNumb = 5;
-        currentSliderSelectionButtonIndex = 5;
-    } else if (currentSlideNumb === 0) {
-        sliderPosition = -((imgNamesArr.length - 1) * slideWidth);
-        currentSlideNumb = 5;
-        currentSliderSelectionButtonIndex = 5;
-    } else {
-        sliderPosition += slideWidth;
-        currentSlideNumb--;
-        currentSliderSelectionButtonIndex--;
+function sliderContainerPositionCalcuator() {
+    slideWidthUpdater();
+    return -(slideWidth * currentSlideIndex);
+}
+function slideSelectionButtonsClickHandler(e) {
+    lastSelectedSlideIndex = currentSlideIndex;
+    currentSlideIndex = +e.target.dataset.slideNumb;
+    unselectSlideSelectionButtonStyleHandler(lastSelectedSlideIndex);
+    selectSlideSelectionButtonStyleHandler(currentSlideIndex);
+    sliderShowWrapperElem.style.left =
+        sliderContainerPositionCalcuator() + "px";
+    clearTimeout(silderOutoChangeTimeOut);
+    autoChangeSlideHandler();
+}
+function changingSlideTowardRIght(e) {
+    slideWidthUpdater();
+    lastSelectedSlideIndex = currentSlideIndex;
+    unselectSlideSelectionButtonStyleHandler(lastSelectedSlideIndex);
+    if (lastSelectedSlideIndex !== imgNamesArr.length - 1) {
+        currentSlideIndex++;
+    } else if (lastSelectedSlideIndex === imgNamesArr.length - 1) {
+        currentSlideIndex = 0;
     }
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "4.2rem";
-    clearInterval(silderShowInterval);
-    silderShowInterval = setInterval(() => {
-        widthAndPositionCalculator();
-        if (currentSlideNumb === imgNamesArr.length - 1) {
-            setTimeout(() => {
-                currentSlideNumb = 0;
-            }, 6000);
-        }
-    }, 6000);
-    sliderShowWrapperElem.style.left = sliderPosition + "px";
-});
-toRightButtonElem.addEventListener("click", () => {
-    sildesWidthUpdater();
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "2.2rem";
-    if (
-        currentSlideNumb === imgNamesArr.length - 1 &&
-        currentSliderSelectionButtonIndex === imgNamesArr.length - 1
-    ) {
-        sliderPosition = 0;
-        currentSlideNumb = 0;
-        currentSliderSelectionButtonIndex = 0;
-    } else {
-        sliderPosition -= slideWidth;
-        if (currentSlideNumb !== imgNamesArr.length - 1) {
-            currentSlideNumb++;
-        }
-        currentSliderSelectionButtonIndex++;
+    sliderShowWrapperElem.style.left =
+        sliderContainerPositionCalcuator() + "px";
+    selectSlideSelectionButtonStyleHandler(currentSlideIndex);
+    clearTimeout(silderOutoChangeTimeOut);
+    autoChangeSlideHandler();
+}
+function changingSlideTowardLeft(e) {
+    slideWidthUpdater();
+    lastSelectedSlideIndex = currentSlideIndex;
+    unselectSlideSelectionButtonStyleHandler(lastSelectedSlideIndex);
+    if (lastSelectedSlideIndex !== 0) {
+        currentSlideIndex--;
+    } else if (lastSelectedSlideIndex === 0) {
+        currentSlideIndex = imgNamesArr.length - 1;
     }
-    selectionSlideCircleElemContainer.children[
-        currentSliderSelectionButtonIndex
-    ].style.width = "4.2rem";
-    clearInterval(silderShowInterval);
-    silderShowInterval = setInterval(() => {
-        widthAndPositionCalculator();
-        if (currentSlideNumb === imgNamesArr.length - 1) {
-            setTimeout(() => {
-                currentSlideNumb = 0;
-            }, 6000);
-        }
-    }, 6000);
-    sliderShowWrapperElem.style.left = sliderPosition + "px";
-});
+    sliderShowWrapperElem.style.left =
+        sliderContainerPositionCalcuator() + "px";
+    selectSlideSelectionButtonStyleHandler(currentSlideIndex);
+    clearTimeout(silderOutoChangeTimeOut);
+    autoChangeSlideHandler();
+}
 createSlideElems(imgNamesArr);
-autoSlideChanger();
-sildesWidthUpdater();

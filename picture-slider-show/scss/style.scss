@@ -7,7 +7,8 @@ html {
     font-size: 10px;
 }
 @mixin left-right-buttons-styles(){
-    border-radius: .4rem;
+    // border-radius: .4rem;
+    border-radius: 100rem;
     height: 5rem;
     width: 5rem;
     background-color: #ffffff;
@@ -17,7 +18,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: .4;
+    opacity: .45;
     cursor: pointer;
     transition: opacity .2s;
     z-index: 99;
@@ -25,7 +26,7 @@ html {
         opacity: .8;
     }
     &:active {
-        opacity: .4;
+        opacity: .45;
     }
     box-shadow: 0 0 12px 3px rgba($color: #000000, $alpha: 0.28);
 }
@@ -41,8 +42,6 @@ body {
         .slider-show-container {
             display: flex;
             flex-direction: row;
-            background-size: cover;
-            background-position: center;
             width: fit-content;
             scroll-behavior: smooth;
             position: relative;
