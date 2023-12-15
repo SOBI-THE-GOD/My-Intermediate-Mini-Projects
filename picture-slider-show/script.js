@@ -19,7 +19,7 @@ const toRightButtonElem = document.querySelector(".right-button");
 const sliderShowWrapperElem = document.querySelector(".slider-show-wrapper");
 function createSlideElems(imgNamesArr) {
     let newElem;
-    let newSelectionSlideCircleElem;
+    let newSelectionSlideButtonElem;
     imgNamesArr.forEach((elem, index) => {
         newElem = document.createElement("div");
         newElem.style.cssText = `height : 100vh;
