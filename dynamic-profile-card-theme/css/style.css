@@ -14,8 +14,8 @@ body {
     font-family: "Dosis", sans-serif;
     height: 100dvh;
     position: relative;
-    -webkit-transition: background-image 0.2s;
-    transition: background-image 0.2s;
+    -webkit-transition: background-image 1s;
+    transition: background-image 1s;
     background-image: linear-gradient(25deg, var(--super-light-color), #ffffff);
 }
 body .cart-wrapper {
@@ -36,7 +36,7 @@ body .cart-wrapper {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 0.5rem;
-    transition: all 2s;
+    transition: all 1s;
 }
 body .cart-wrapper .picture-section {
     display: flex;
@@ -63,7 +63,7 @@ body .cart-wrapper .picture-section .edit-theme-container .edit-theme-button {
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: all 2s;
+    transition: all 1s;
     /* animation: editButtonScaleAnm 0.75s forwards; */
     scale: 1;
     background-color: var(--super-light-color);
@@ -123,13 +123,13 @@ body .cart-wrapper .picture-section .theme-colors-buttons {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    transition: all 2s;
+    transition: all 1s;
 }
 body .cart-wrapper .profile-image {
     height: 8rem;
     width: 8rem;
     border: 0.6rem solid var(--main-color);
-    transition: all 2s;
+    transition: all 1s;
     border-radius: 50%;
 }
 body .cart-wrapper .user-name-section {
@@ -146,7 +146,7 @@ body .cart-wrapper .details-section {
     row-gap: 1.35rem;
     border-radius: 1.4rem;
     border: 1rem solid var(--light-color);
-    transition: all 2s;
+    transition: all 1s;
 }
 body .cart-wrapper .details-section .details-wrapper {
     display: flex;
@@ -182,7 +182,7 @@ body .cart-wrapper .aboutme-section {
     row-gap: 0.4rem;
     padding: 0.3rem 0 0.45rem 0.6rem;
     border: 1rem solid var(--light-color);
-    transition: all 2s;
+    transition: all 1s;
     border-radius: 1.4rem;
 }
 body .cart-wrapper .aboutme-section .aboutme {
