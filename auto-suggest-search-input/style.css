@@ -1,0 +1,135 @@
+/* #DB143B */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    background-color: #363636;
+}
+.search-bar-sec-cont {
+    background-color: #db143b;
+    border-radius: 100rem;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-shadow: 0 0 10px 2px #db143b;
+}
+.search-icon-container {
+    width: 5.5rem;
+    position: relative;
+    top: 50%;
+    left: 100%;
+    translate: -50% -50%;
+    height: 5.5rem;
+    border-radius: 100rem;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.7s ease-in-out;
+    box-shadow: 0 0 10px 3px #000;
+}
+.fa-light {
+    font-size: 2rem;
+    color: #fff;
+}
+#search-bar {
+    width: 0;
+    padding-inline: 0;
+    border-radius: 100rem;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+    font-size: 1.4rem;
+    color: #fff;
+    outline: none;
+    background-color: #db143b;
+    border: none;
+    transition: all 0.7s ease-in-out;
+}
+#search-bar::placeholder {
+    color: #fff;
+}
+.suggestion-container {
+    list-style: none;
+    color: #fff;
+    background-color: #000;
+    padding-top: 3.5rem;
+    width: 25rem;
+    margin-top: 0rem;
+    position: absolute;
+    left: 50%;
+    top: calc(50%);
+    translate: -50% 0;
+    border-radius: 1rem;
+    padding-inline: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #db143b;
+    font-size: 1.2rem;
+    display: none;
+}
+.suggestion {
+    width: 100%;
+    text-wrap: nowrap;
+    background-color: #000;
+    padding-block: 0.5rem;
+    padding-left: 0.4rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.suggestion:hover {
+    background-color: #db143cc7;
+}
+.search-bar-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.search-bar-cont {
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 99;
+    width: 0;
+    transition: all 0.7s ease-in-out;
+}
+#search-bar.input-searching {
+    width: 15em;
+    padding-inline: 1.4rem;
+}
+.search-icon-container-searching {
+    translate: -100% -50%;
+    box-shadow: 0 0 10px 3px #db143b;
+}
+.search-cont-searching {
+    height: 4rem;
+    width: 25rem;
+}
+.suggestion-container.visible {
+    display: flex;
+}
+@keyframes searchIconAnm {
+    0% {
+        scale: 1;
+    }
+    45% {
+        scale: 0.3;
+    }
+    85% {
+        scale: 1.15;
+    }
+    100% {
+        scale: 1;
+    }
+}
