@@ -47,7 +47,7 @@ const searchIconClickHandler = () => {
 const findBestSuggests = () => {
     bestSuggestions = [];
     bestSuggestions = suggestionsDataArr.filter((elem) => {
-        return elem === searchInput.value;
+        return elem.toLowerCase() === searchInput.value.toLowerCase();
     });
 
     if (bestSuggestions.length === 0) {
@@ -60,7 +60,11 @@ const findBestSuggests = () => {
         inputArr.forEach((inputWord) => {
             if (inputWord !== "") {
                 suggestionsDataArr.forEach((suggestion) => {
-                    if (suggestion.includes(inputWord)) {
+                    if (
+                        suggestion
+                            .toLowerCase()
+                            .includes(inputWord.toLowerCase())
+                    ) {
                         suggestionIndex = suggestionsWithScore.findIndex(
                             (suggest) => {
                                 return suggest.value === suggestion;
